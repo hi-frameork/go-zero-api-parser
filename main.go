@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"reflect"
 
 	"github.com/zeromicro/go-zero/tools/goctl/api/parser"
 	"github.com/zeromicro/go-zero/tools/goctl/api/spec"
@@ -155,10 +156,50 @@ func convertToApiParseResult(apiSpec *spec.ApiSpec) *ApiParseResult {
 
 	// 转换 Types
 	for _, typ := range apiSpec.Types {
-		if defineStruct, ok := typ.(*spec.DefineStruct); ok {
-			apiType := convertDefineStructToApiType(defineStruct)
-			result.Types = append(result.Types, apiType)
+		var apiType ApiType
+
+		switch t := typ.(type) {
+		case *spec.DefineStruct:
+			apiType = convertDefineStructToApiType(t)
+		default:
+			// 处理其他类型定义，通过反射获取 Members 字段
+			apiType = ApiType{
+				Name:   typ.Name(),
+				Fields: make([]ApiTypeField, 0),
+				Docs:   make([]string, 0),
+				Enums:  make(map[string]string),
+			}
+
+			// 使用反射获取 Members 字段
+			if members := getMembers(t); len(members) > 0 {
+				for _, member := range members {
+					field := ApiTypeField{
+						Name:     member.Name,
+						Type:     member.Type.Name(),
+						Optional: member.IsOptional(),
+						IsInline: member.IsInline,
+						Docs:     make([]string, 0),
+					}
+
+					if member.Tag != "" {
+						field.Tag = member.Tag
+					}
+
+					if member.Comment != "" {
+						field.Comment = member.Comment
+					}
+
+					if len(member.Docs) > 0 {
+						field.Docs = make([]string, len(member.Docs))
+						copy(field.Docs, member.Docs)
+					}
+
+					apiType.Fields = append(apiType.Fields, field)
+				}
+			}
 		}
+
+		result.Types = append(result.Types, apiType)
 	}
 
 	// 转换 Services
@@ -278,6 +319,50 @@ func convertDefineStructToApiType(defineStruct *spec.DefineStruct) ApiType {
 	}
 
 	return apiType
+}
+
+// getMembers 通过反射尝试获取 Members 字段
+func getMembers(v interface{}) []*spec.Member {
+	rv := reflect.ValueOf(v)
+	if rv.Kind() == reflect.Ptr {
+		rv = rv.Elem()
+	}
+
+	if rv.Kind() != reflect.Struct {
+		return nil
+	}
+
+	membersField := rv.FieldByName("Members")
+	if !membersField.IsValid() {
+		return nil
+	}
+
+	// 检查是否是 []spec.Member 类型
+	if membersField.Type() == reflect.TypeOf([]spec.Member{}) {
+		memberSlice, ok := membersField.Interface().([]spec.Member)
+		if !ok {
+			return nil
+		}
+
+		// 转换为 []*spec.Member
+		members := make([]*spec.Member, len(memberSlice))
+		for i := range memberSlice {
+			members[i] = &memberSlice[i]
+		}
+
+		return members
+	}
+
+	// 检查是否是 []*spec.Member 类型
+	if membersField.Type() == reflect.TypeOf([]*spec.Member{}) {
+		members, ok := membersField.Interface().([]*spec.Member)
+		if !ok {
+			return nil
+		}
+		return members
+	}
+
+	return nil
 }
 
 func getInfoValue(properties map[string]string, key string) string {

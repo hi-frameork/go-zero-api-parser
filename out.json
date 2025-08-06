@@ -1,0 +1,942 @@
+{
+  "syntax": "",
+  "info": {
+    "title": "message服务admin接口",
+    "desc": "message服务admin接口",
+    "author": "",
+    "date": "",
+    "version": "v1",
+    "email": "",
+    "properties": {
+      "author": "",
+      "date": "",
+      "desc": "message服务admin接口",
+      "title": "message服务admin接口",
+      "version": "v1"
+    }
+  },
+  "imports": [],
+  "types": [
+    {
+      "name": "ChangeStatusReq",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int64",
+          "tag": "`json:\"id\"`",
+          "comment": "// 记录id，编辑时必须",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "Status",
+          "type": "EnumStatus",
+          "tag": "`json:\"status\"`",
+          "comment": "// 消息标题",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "ChangeStatusResp",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int64",
+          "tag": "`json:\"id\"`",
+          "comment": "// 消息配置id",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "ConfigItem",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int64",
+          "tag": "`json:\"id\"`",
+          "comment": "// 记录id，编辑时必须",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "Title",
+          "type": "string",
+          "tag": "`json:\"title\"`",
+          "comment": "// 消息标题",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "ContentType",
+          "type": "EnumContentType",
+          "tag": "`json:\"content_type\"`",
+          "comment": "// 消息内容类型 1纯文本 2文本+连接 3图文消息",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "ContentKey",
+          "type": "string",
+          "tag": "`json:\"content_key\"`",
+          "comment": "// 消息内容key",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "Content",
+          "type": "string",
+          "tag": "`json:\"content\"`",
+          "comment": "// 消息内容",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "HighlightTextKey",
+          "type": "int64",
+          "tag": "`json:\"highlight_text_key\"`",
+          "comment": "// 高亮文本key，多个用英文逗号隔开，文本+连接消息必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "HighlightTextUrl",
+          "type": "string",
+          "tag": "`json:\"highlight_text_url\"`",
+          "comment": "// 高亮文本跳转连接，多个用英文逗号隔开，文本+连接消息必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "ImageKey",
+          "type": "string",
+          "tag": "`json:\"image_key\"`",
+          "comment": "// 图片key，图文消息时必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "ImageUrl",
+          "type": "string",
+          "tag": "`json:\"image_url\"`",
+          "comment": "// 图片路径",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "SkipUrl",
+          "type": "string",
+          "tag": "`json:\"skip_url\"`",
+          "comment": "// 消息图片多语言key",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "CowdType",
+          "type": "EnumCowdType",
+          "tag": "`json:\"crowd_type\"`",
+          "comment": "// 用户圈定 1活跃用户 2新用户 3指定用户",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "NotifyChannel",
+          "type": "int32",
+          "tag": "`json:\"notify_channel\"`",
+          "comment": "// 通知渠道 默认1系统通知 2官方号通知",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "OfficialUid",
+          "type": "int64",
+          "tag": "`json:\"official_uid\"`",
+          "comment": "// 官方号通知uid",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "MsgType",
+          "type": "EnumMsgType",
+          "tag": "`json:\"msg_type\"`",
+          "comment": "// 消息类型 默认0单次 1每日循环 2每周循环",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "AssignUid",
+          "type": "string",
+          "tag": "`json:\"assign_uid\"`",
+          "comment": "// 指定uid， 多个逗号隔开，指定用户时必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "GenderLimit",
+          "type": "EnumGenderLimitType",
+          "tag": "`json:\"gender_limit\"`",
+          "comment": "// 性别限制 默认0不限制 1仅男用户 2仅女用户",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "AgencyLimit",
+          "type": "EnumAgencyLimitType",
+          "tag": "`json:\"agency_limit\"`",
+          "comment": "// 公会限制 默认0不限制 1仅公会用户 2仅非公会用户",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "CountryLimit",
+          "type": "EnumCountryLimitType",
+          "tag": "`json:\"country_limit\"`",
+          "comment": "// 国家限制 默认0不限制 1黑名单 2白名单",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "CountryList",
+          "type": "string",
+          "tag": "`json:\"country_list\"`",
+          "comment": "// 国家限制列表多个逗号隔开，国家限制时必填 eg:TH",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "AndroidMinVersionLimit",
+          "type": "string",
+          "tag": "`json:\"android_min_version_limit\"`",
+          "comment": "// android限制最小版本号 默认空不限制, 最小000.000.000",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "AndroidMaxVersionLimit",
+          "type": "string",
+          "tag": "`json:\"android_max_version_limit\"`",
+          "comment": "// android限制最大版本号 默认空不限制，最大999.999.999",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "IosMinVersionLimit",
+          "type": "string",
+          "tag": "`json:\"ios_min_version_limit\"`",
+          "comment": "// ios限制最小版本号 默认空不限制, 最小000.000.000",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "IosMaxVersionLimit",
+          "type": "string",
+          "tag": "`json:\"ios_max_version_limit\"`",
+          "comment": "// ios限制最大版本号 默认空不限制，最大999.999.999",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "PushFcm",
+          "type": "string",
+          "tag": "`json:\"push_fcm\"`",
+          "comment": "// 推送fcm 默认0不推送 1推送",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "WeekDate",
+          "type": "string",
+          "tag": "`json:\"week_date\"`",
+          "comment": "// 周循环具体周x 范围[1-7]对应周一至周日，周循环时必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "SingleTime",
+          "type": "int64",
+          "tag": "`json:\"single_time\"`",
+          "comment": "// 单次消息推送时间戳，精确至分钟，单次必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "CycleTime",
+          "type": "string",
+          "tag": "`json:\"cycle_time\"`",
+          "comment": "// 循环消息设定时间 24小时格式：时-分 eg：09:00 天或周循环时必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "StartTime",
+          "type": "int64",
+          "tag": "`json:\"start_time\"`",
+          "comment": "// 循环消息有效开始时间戳，天或周循环时必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EndTime",
+          "type": "int64",
+          "tag": "`json:\"end_time\"`",
+          "comment": "// 循环消息有效结束时间戳，天或周循环时必填",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "Status",
+          "type": "int32",
+          "tag": "`json:\"status\"`",
+          "comment": "// 消息状态 0:未激活 1:未开始【已激活】 2:进行中 3:已关闭（结束）",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "CreatedAt",
+          "type": "string",
+          "tag": "`json:\"created_at\"`",
+          "comment": "// 创建时间",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "UpdatedAt",
+          "type": "string",
+          "tag": "`json:\"updated_at\"`",
+          "comment": "// 最后更新时间",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "ConfigListReq",
+      "fields": [
+        {
+          "name": "Title",
+          "type": "string",
+          "tag": "`json:\"title,optional\"`",
+          "comment": "// 消息标题，支持模糊查询",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "ContentType",
+          "type": "EnumContentType",
+          "tag": "`json:\"content_type,optional\"`",
+          "comment": "// 消息内容类型 1纯文本 2文本+连接 3图文消息",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "Status",
+          "type": "int32",
+          "tag": "`json:\"status,optional\"`",
+          "comment": "// 消息状态 0:未激活 1:未开始【已激活】 2:进行中 3:已关闭（结束）",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "NotifyChannel",
+          "type": "int32",
+          "tag": "`json:\"notify_channel,optional\"`",
+          "comment": "// 通知渠道 默认1系统通知 2官方号通知",
+          "is_inline": false,
+          "optional": true
+        }
+      ]
+    },
+    {
+      "name": "ConfigListResp",
+      "fields": [
+        {
+          "name": "Total",
+          "type": "int64",
+          "tag": "`json:\"total\"`",
+          "comment": "// 总数",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "List",
+          "type": "[]ConfigItem",
+          "tag": "`json:\"list\"`",
+          "comment": "// 列表",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "EnumAgencyLimitType",
+      "fields": [
+        {
+          "name": "EnumAgencyLimitTypeInit",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"0\"`",
+          "comment": "// 不限制",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumAgencyLimitTypeYes",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"1\"`",
+          "comment": "// 限制公会成员",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumAgencyLimitTypeNot",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"2\"`",
+          "comment": "// 限制非公会成员",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "EnumContentType",
+      "fields": [
+        {
+          "name": "EnumContentTypeText",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"1\"`",
+          "comment": "// 纯文本",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumContentTypeTextLink",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"2\"`",
+          "comment": "// 文本+连接",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumContentTypeTextImage",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"3\"`",
+          "comment": "// 图片+文字",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumContentTypeImage",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"4\"`",
+          "comment": "// 图片",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "EnumCountryLimitType",
+      "fields": [
+        {
+          "name": "EnumCountryLimitTypeInit",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"0\"`",
+          "comment": "// 不限制国家",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumCountryLimitTypeBlack",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"1\"`",
+          "comment": "// 国家黑名单",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumCountryLimitTypeWhite",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"2\"`",
+          "comment": "// 国家白名单",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "EnumCowdType",
+      "fields": [
+        {
+          "name": "EnumCowdTypeActive",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"1\"`",
+          "comment": "// 活跃用户【近7天】",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumCowdTypeNewbie",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"2\"`",
+          "comment": "// 新人用户【近3天注册】",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumCowdTypeSpecify",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"3\"`",
+          "comment": "// 指定用户",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "EnumGenderLimitType",
+      "fields": [
+        {
+          "name": "EnumGenderLimitTypeInit",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"0\"`",
+          "comment": "// 不限制",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumGenderLimitTypeMale",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"1\"`",
+          "comment": "// 限制男",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumGenderLimitTypeFemale",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"2\"`",
+          "comment": "// 限制女",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "EnumMsgType",
+      "fields": [
+        {
+          "name": "EnumMsgTypeOnce",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"1\"`",
+          "comment": "// 单次",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumMsgTypeDailyLoop",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"2\"`",
+          "comment": "// 天循环",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumMsgTypeWeekLoop",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"3\"`",
+          "comment": "// 周循环",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "EnumStatus",
+      "fields": [
+        {
+          "name": "EnumStatusActivated",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"1\"`",
+          "comment": "// 激活",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumStatusClosed",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"3\"`",
+          "comment": "// 关闭",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "EnumStatusDeleted",
+          "type": "int32",
+          "tag": "`json:\"-\" val:\"4\"`",
+          "comment": "// 删除",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "OfficialListReq",
+      "fields": []
+    },
+    {
+      "name": "OfficialListResp",
+      "fields": [
+        {
+          "name": "UserId",
+          "type": "int64",
+          "tag": "`json:\"user_id\"`",
+          "comment": "// 官方号uid",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "OwnerName",
+          "type": "string",
+          "tag": "`json:\"owner_name\"`",
+          "comment": "// 归属人",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "Type",
+          "type": "int32",
+          "tag": "`json:\"type\"`",
+          "comment": "// 官方号类型 1官方运营号 5官方local 6官方客服号",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "Country",
+          "type": "string",
+          "tag": "`json:\"country\"`",
+          "comment": "// 官方号国家",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "CountryCode",
+          "type": "string",
+          "tag": "`json:\"country_code\"`",
+          "comment": "// 官方号国家code",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "SaveConfigReq",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int64",
+          "tag": "`json:\"id,optional\"`",
+          "comment": "// 记录id，编辑时必须",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "Title",
+          "type": "string",
+          "tag": "`json:\"title\"`",
+          "comment": "// 消息标题",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "ContentType",
+          "type": "EnumContentType",
+          "tag": "`json:\"content_type\"`",
+          "comment": "// 消息内容类型 1纯文本 2文本+连接 3图文消息",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "ContentKey",
+          "type": "string",
+          "tag": "`json:\"content_key\"`",
+          "comment": "// 消息内容key",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "Content",
+          "type": "string",
+          "tag": "`json:\"content\"`",
+          "comment": "// 消息内容",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "HighlightTextKey",
+          "type": "int64",
+          "tag": "`json:\"highlight_text_key,optional\"`",
+          "comment": "// 高亮文本key，多个用英文逗号隔开，文本+连接消息必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "HighlightTextUrl",
+          "type": "string",
+          "tag": "`json:\"highlight_text_url,optional\"`",
+          "comment": "// 高亮文本跳转连接，多个用英文逗号隔开，文本+连接消息必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "ImageKey",
+          "type": "string",
+          "tag": "`json:\"image_key,optional\"`",
+          "comment": "// 图片key，图文消息时必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "ImageUrl",
+          "type": "string",
+          "tag": "`json:\"image_url,optional\"`",
+          "comment": "// 图片路径",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "SkipUrl",
+          "type": "string",
+          "tag": "`json:\"skip_url\"`",
+          "comment": "// 消息图片多语言key",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "CowdType",
+          "type": "EnumCowdType",
+          "tag": "`json:\"crowd_type\"`",
+          "comment": "// 用户圈定 1活跃用户 2新用户 3指定用户",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "NotifyChannel",
+          "type": "int32",
+          "tag": "`json:\"notify_channel\"`",
+          "comment": "// 通知渠道 默认1系统通知 2官方号通知",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "OfficialUid",
+          "type": "int64",
+          "tag": "`json:\"official_uid\"`",
+          "comment": "// 官方号通知uid",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "MsgType",
+          "type": "EnumMsgType",
+          "tag": "`json:\"msg_type\"`",
+          "comment": "// 消息类型 默认0单次 1每日循环 2每周循环",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "AssignUid",
+          "type": "string",
+          "tag": "`json:\"assign_uid,optional\"`",
+          "comment": "// 指定uid， 多个逗号隔开，指定用户时必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "GenderLimit",
+          "type": "EnumGenderLimitType",
+          "tag": "`json:\"gender_limit,optional\"`",
+          "comment": "// 性别限制 默认0不限制 1仅男用户 2仅女用户",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "AgencyLimit",
+          "type": "EnumAgencyLimitType",
+          "tag": "`json:\"agency_limit,optional\"`",
+          "comment": "// 公会限制 默认0不限制 1仅公会用户 2仅非公会用户",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "CountryLimit",
+          "type": "EnumCountryLimitType",
+          "tag": "`json:\"country_limit,optional\"`",
+          "comment": "// 国家限制 默认0不限制 1黑名单 2白名单",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "CountryList",
+          "type": "string",
+          "tag": "`json:\"country_list,optional\"`",
+          "comment": "// 国家限制列表多个逗号隔开，国家限制时必填  eg:TH",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "AndroidMinVersionLimit",
+          "type": "string",
+          "tag": "`json:\"android_min_version_limit\"`",
+          "comment": "// android限制最小版本号 默认空不限制, 最小000.000.000",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "AndroidMaxVersionLimit",
+          "type": "string",
+          "tag": "`json:\"android_max_version_limit\"`",
+          "comment": "// android限制最大版本号 默认空不限制，最大999.999.999",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "IosMinVersionLimit",
+          "type": "string",
+          "tag": "`json:\"ios_min_version_limit\"`",
+          "comment": "// ios限制最小版本号 默认空不限制, 最小000.000.000",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "IosMaxVersionLimit",
+          "type": "string",
+          "tag": "`json:\"ios_max_version_limit\"`",
+          "comment": "// ios限制最大版本号 默认空不限制，最大999.999.999",
+          "is_inline": false,
+          "optional": false
+        },
+        {
+          "name": "PushFcm",
+          "type": "string",
+          "tag": "`json:\"push_fcm,optional\"`",
+          "comment": "// 推送fcm 默认0不推送 1推送",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "WeekDate",
+          "type": "string",
+          "tag": "`json:\"week_date,optional\"`",
+          "comment": "// 周循环具体周x 范围[1-7]对应周一至周日，周循环时必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "SingleTime",
+          "type": "int64",
+          "tag": "`json:\"single_time,optional\"`",
+          "comment": "// 单次消息推送时间戳，精确至分钟，单次必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "CycleTime",
+          "type": "string",
+          "tag": "`json:\"cycle_time,optional\"`",
+          "comment": "// 循环消息设定时间 24小时格式：时-分 eg：09:00 天或周循环时必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "StartTime",
+          "type": "int64",
+          "tag": "`json:\"start_time,optional\"`",
+          "comment": "// 循环消息有效开始时间戳，天或周循环时必填",
+          "is_inline": false,
+          "optional": true
+        },
+        {
+          "name": "EndTime",
+          "type": "int64",
+          "tag": "`json:\"end_time,optional\"`",
+          "comment": "// 循环消息有效结束时间戳，天或周循环时必填",
+          "is_inline": false,
+          "optional": true
+        }
+      ]
+    },
+    {
+      "name": "SaveConfigResp",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int64",
+          "tag": "`json:\"id\"`",
+          "comment": "// 消息配置id",
+          "is_inline": false,
+          "optional": false
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "name": "Message",
+      "server": {
+        "group": "msg",
+        "prefix": "/api/v2/message/admin/system/msg",
+        "auth": "false",
+        "middleware": [],
+        "timeout": ""
+      },
+      "routes": [
+        {
+          "handler": "changeStatus",
+          "method": "post",
+          "path": "/change-status",
+          "request_type": "ChangeStatusReq",
+          "response_type": "ChangeStatusResp",
+          "doc": {
+            "description": "修改系统消息配置状态",
+            "summary": "修改系统消息配置状态"
+          }
+        },
+        {
+          "handler": "configList",
+          "method": "post",
+          "path": "/config-list",
+          "request_type": "ConfigListReq",
+          "response_type": "ConfigListResp",
+          "doc": {
+            "description": "获取系统消息配置列表",
+            "summary": "获取系统消息配置列表"
+          }
+        },
+        {
+          "handler": "officialList",
+          "method": "post",
+          "path": "/official-list",
+          "request_type": "OfficialListReq",
+          "response_type": "OfficialListResp",
+          "doc": {
+            "description": "系统消息官方号列表",
+            "summary": "系统消息官方号列表"
+          }
+        },
+        {
+          "handler": "saveConfig",
+          "method": "post",
+          "path": "/save-config",
+          "request_type": "SaveConfigReq",
+          "response_type": "SaveConfigResp",
+          "doc": {
+            "description": "新增/编辑系统消息配置",
+            "summary": "新增/编辑系统消息配置"
+          }
+        }
+      ]
+    }
+  ]
+}
