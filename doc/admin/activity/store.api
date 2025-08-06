@@ -1,0 +1,107 @@
+syntax = "v1"
+
+type (
+    EnumProductType {
+        EnumProductTypeBagGift string `json:"-" val:"BAG_GIFT"` //背包礼物
+        EnumProductTypeAvatarDecor string `json:"-" val:"AVATAR_DECOR"` //头像框装饰
+        EnumProductTypeHonorTitle string `json:"-" val:"HONOR_TITLE"` //荣誉称号
+        EnumProductTypeChatBubble string `json:"-" val:"CHAT_BUBBLE"` //聊天气泡
+        EnumProductTypeRide string `json:"-" val:"RIDE"` //座驾特效
+        EnumProductTypeJoinRoomEffect string `json:"-" val:"JOIN_ROOM_EFFECT"` //进房动效
+        EnumProductTypeMedal string `json:"-" val:"MEDAL"` //荣誉勋章
+        EnumProductTypeProfileCard string `json:"-" val:"PROFILE_CARD"` //资料卡皮肤
+        EnumProductTypeGiftBorder string `json:"-" val:"GIFT_BORDER"` //礼物横幅边框
+        EnumProductTypePersonalityImage string `json:"-" val:"PERSONALITY_IMAGE"` //个性形象
+//        EnumProductTypeRoomBackground string `json:"-" val:"ROOM_BACKGROUND"` //语音房-房间背景
+    }
+
+    SaveStoreReq {
+        ActivityId int `json:"activity_id,optional"`        //活动id，编辑时必须
+        MissionType int32 `json:"mission_type,options=21|22"` //mission_type=21对应-折扣商店 mission_type=22对应神秘商店
+        CountrySet CountrySet `json:"country_set"`          //国家配置
+        StartTime int64 `json:"start_time"`                 //开始时间
+        EndTime int64 `json:"end_time"`                     //结束时间
+        MissionKey string `json:"mission_key"`              //活动名称key
+        LinkUrl string `json:"link_url"`                    //活动链接
+        Notes string `json:"notes"`                         //备注
+        MissionBanner MissionBanner `json:"mission_banner,options"` //动态插件banner
+        SetTab int32 `json:"set_tab,options=0|1"`           //-不分tab 1-分tab
+        Tabs []StoreTabListItem `json:"tabs"`               //tab和商品
+        Style string `json:"style,options=default_mysterious_store|islam_mysterious_store|default_discount_store"` //样式主题神秘商店默认皮肤(紫色)：default_mysterious_store,神秘商店伊斯兰新年皮肤(绿色)：islam_mysterious_store,折扣商店默认皮肤(红色)：default_discount_store
+    }
+
+    MissionBanner {
+        Open int32 `json:"open"`                      //0-关闭 1-开启
+        Scenes []int32 `json:"scenes,optional"`       //场景 场景{1:语音房,2:视频房,3:私聊,4:群聊,5:1v1视频,6:1v1语音,}
+        Sort int `json:"sort,optional"`               //排序
+        Background string `json:"background,optional"`//背景图
+
+    }
+
+    CountrySet {
+        Type int32 `json:"type,options=0|1|2"`                //0-不限制 1-白名单 2-黑名单
+        CountryCodes []string `json:"country_codes,optional"` //国家码
+    }
+
+    StoreTabListItem {
+        Tab StoreTabInfo `json:"tab,optional"` //tab信息-设置不分tab不传
+        Products []StoreProduct `json:"products"`  //商品列表
+    }
+    StoreTabInfo {
+        TabId int64 `json:"tab_id"`                                       //必须，tab是新建的时候传0，编辑的时候传获取时候的tab_id
+        TabIndex int64 `json:"tab_index"`   //tab位置，用来定位在设置解锁条件的时候定位tab的, 从0开始
+        TabNameLangKey string `json:"tab_name_lang_key"`
+        UnlockCondition StoreTabUnlockCondition `json:"unlock_condition"` //解锁条件
+    }
+
+    StoreTabUnlockCondition {
+        Type int32 `json:"type,options=0|1"` //0-无条件 1-消费金币门槛
+        TabIndexs []int64 `json:"tab_indexs"`      //指定的tab-数组,由选择的tab的tab_index组成的数组
+        Condition StoreTabUnlockConditionCondition `json:"condition,optional"`
+    }
+
+    StoreTabUnlockConditionCondition {
+        Threshold int64 `json:"threshold"` //阈值-消费金币门槛就是目标金币数
+    }
+
+    StoreProduct {
+        ProductId int64 `json:"product_id"`   //必须，商品是新建的时候传0，其他传获取到的product_id
+        RelateId int64 `json:"relate_id"` //商品在相关业务侧的id
+        Sort int64 `json:"sort"`   //商品排序值
+        ProductType EnumProductType `json:"product_type"` //商品类型：BAG_GIFT-背包礼物 装扮类型: AVATAR_DECOR-头像框装饰, HONOR_TITLE-荣誉称号, CHAT_BUBBLE-聊天气泡, RIDE-座驾特效, JOIN_ROOM_EFFECT-进房动效, , MEDAL-荣誉勋章, PROFILE_CARD-资料卡皮肤, GIFT_BORDER-礼物横幅边框, PERSONALITY_IMAGE-个性形象
+        EffectiveDuration int64 `json:"effective_duration"` //有效期-秒
+        OriPrice int64 `json:"ori_price"`  //商品原价 - 折扣需要
+        Price int64 `json:"price"`   //价格，当是折扣商品时为折扣价，非折扣商品为价格
+        SaleMode int32 `json:"sale_mode,options=1|2|3"`  //1-不限量 2-限库存 3-单用户限购
+        SaleModeAttr StoreSaleModeAttr `json:"sale_mode_attr,optional"` //销售模式属性配置,不限量传null或不传
+        TagLangKey string `json:"tag_lang_key,optional"` //商品标签
+        ResQuantity int64 `json:"res_quantity,optional"`     //剩余库存,sale_mode=2限库存有并且编辑的时候返回
+    }
+
+    StoreSaleModeAttr {
+        Quantity int64 `json:"quantity"`                         //库存/限购数量
+        Cycle string `json:"cycle,optional,options=daily|period"`//限制周期 daily-每天 period-活动期间
+    }
+
+    SaveStoreResp {
+        ActivityId int64 `json:"activity_id"`//活动id
+    }
+
+    GetStoreInfoReq {
+        ActivityId int64 `json:"activity_id"`//活动id
+    }
+
+    GetStoreInfoResp {
+        ActivityId int64 `json:"activity_id"`               //活动id
+        MissionType int32 `json:"mission_type"`             //mission_type=21对应-折扣商店 mission_type=22对应神秘商店
+        CountrySet CountrySet `json:"country_set"`          //国家配置
+        StartTime int64 `json:"start_time"`                 //开始时间
+        EndTime int64 `json:"end_time"`                     //结束时间
+        MissionKey string `json:"mission_key"`              //活动名称key
+        LinkUrl string `json:"link_url"`                    //活动链接
+        Notes string `json:"notes"`                         //备注
+        MissionBanner MissionBanner `json:"mission_banner"` //动态插件banner
+        SetTab int32 `json:"set_tab,options=0|1"`           //-不分tab 1-分tab
+        Tabs []StoreTabListItem `json:"tabs"`               //tab和商品
+    }
+)

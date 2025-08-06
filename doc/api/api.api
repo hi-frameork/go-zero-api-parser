@@ -1,0 +1,73 @@
+syntax = "v1"
+
+import (
+	//导入入请求和响应结果定义
+	"notice/popup.api"
+	"activity/store.api"
+)
+
+info (
+	title:   "sift服务api接口"
+	desc:    "sift服务api接口"
+	author:  ""
+	date:    ""
+	version: "v1"
+)
+
+
+@server (
+	group:  notice  //通知功能
+	prefix: /api/v2/sift/notice
+	auth:   false
+)
+service Sift {
+	@doc (
+		summary:     "拉取特殊定制弹窗"
+		description: "- ** 为了支持不同的定制需求，body的json字符串，里面为根据不同popup_type定制的异构数据，客户端需要通过popup_type将json解析到不同的结构，当是基于lynx的弹窗时候，body的数据是对应给对应的bundle文件使用的 **\n\n- **body结构定义**\n\n| popup_type | 含义 |\n| --- | --- |\n| 1 | 后台配置弹窗 |\n| 2 | 基于lynx的弹窗 |\n\n- popup_type=2 并且是神秘商店和惊喜商店的弹窗 \n\n| 字段 |类型  | 含义 | 值|\n| --- | --- | --- |--|\n| store_id | integer  | 商店|\n| store_type | integer|商店类型|1-惊喜商店 2-神秘商店|\n|link_url|string|跳转链接||\n|title|string|标题||\n|sub_title|string|副标题||\n|style|object|样式定义||\n|- background|string|背景图||\n|start_time|int|开始时间戳(秒)||\n|end_time|int|结束时间戳（秒）||\n|products|array[object]|商品列表||\n|- product_id|int|商品id||\n|- title|string|商品标题||\n|- icon|string|商品图标||\n|- price|int|最终价格||\n|- discount_price|int|折扣价格||\n|- ori_price|int|原价||\n|- discount|int|折扣%||\n|tag|string|商店标签||"
+	)
+	@handler handlerNamegetSpcPopup //TODO 第二版本实现脚手架的入口方法
+	post /get-popup (GetSpcPopupReq) returns (GetSpcPopupResp)
+}
+
+@server (
+	group:  store  //通知功能
+	prefix: /api/v2/sift/store
+	auth:   false
+)
+service Sift {
+	@doc (
+		summary:     "个性商城首页入口信息"
+		description: "个性商城首页入口信息"
+	)
+	@handler storeEntrance
+	post /entrance-info (StoreEntranceInfoReq) returns (StoreEntranceInfoResp)
+
+	@doc (
+		summary:     "商店列表"
+		description: "商店列表接口"
+	)
+	@handler StoreIndex
+	post /store-index (StoreIndexReq) returns (StoreIndexResp)
+
+	@doc (
+		summary:     "商品购买记录"
+		description: "商品购买记录"
+	)
+	@handler StoreBuyRecord
+	post /store-buy-record (StoreBuyRecordReq) returns (StoreBuyRecordResp)
+
+	@doc (
+		summary:     "购买商品"
+		description: "购买商品 错误码：7002-余额不足"
+	)
+	@handler buy
+	post /buy(StoreBuyReq) returns (StoreBuyResp)
+
+	@doc (
+		summary:     "获取单个商品详情"
+		description: "获取单个商品详情"
+	)
+	@handler getProductInfo
+	post /get-product-info(GetProductInfoReq) returns (GetProductInfoResp)
+}
+

@@ -1,0 +1,46 @@
+syntax = "v1"
+
+import "system/msg.api" //导入请求和响应结果定义
+
+info (
+	title:   "message服务admin接口"
+	desc:    "message服务admin接口"
+	author:  ""
+	date:    ""
+	version: "v1"
+)
+
+@server(
+	group: msg
+	prefix: /api/v2/message/admin/system/msg
+	auth: false
+)
+service Message {
+	@doc (
+		summary: "新增/编辑系统消息配置"
+		description: "新增/编辑系统消息配置"
+	)
+	@handler saveConfig
+	post /save-config (SaveConfigReq) returns (SaveConfigResp)
+
+	@doc (
+		summary: "获取系统消息配置列表"
+		description: "获取系统消息配置列表"
+	)
+	@handler configList
+	post /config-list (ConfigListReq) returns (ConfigListResp)
+
+	@doc (
+		summary: "修改系统消息配置状态"
+		description: "修改系统消息配置状态"
+	)
+	@handler changeStatus
+	post /change-status (ChangeStatusReq) returns (ChangeStatusResp)
+
+	@doc (
+		summary: "系统消息官方号列表"
+		description: "系统消息官方号列表"
+	)
+	@handler officialList
+	post /official-list (OfficialListReq) returns (OfficialListResp)
+}

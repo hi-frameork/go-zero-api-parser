@@ -1,0 +1,74 @@
+syntax = "v1"
+
+import (
+	"activity/store.api"
+	"activity/popup.api"
+) //导入请求和响应结果定义
+
+info (
+	title:   "sift服务admin接口"
+	desc:    "sift服务admin接口"
+	author:  ""
+	date:    ""
+	version: "v1"
+)
+
+
+
+@server(
+	group: store
+	prefix: /api/v2/sift/admin/activity/store
+	auth: false
+)
+service Sift {
+	@doc (
+		summary: "新增/编辑商店活动"
+		description: "新增和编辑商店活动"
+	)
+	@handler saveStore
+	post /save-store (SaveStoreReq) returns (SaveStoreResp)
+
+	@doc (
+		summary: "获取商店活动详细戏信息"
+		description: "获取商店活动详细戏信息"
+	)
+	@handler getStoreInfo
+	post /get-store-info (GetStoreInfoReq) returns (GetStoreInfoResp)
+
+}
+
+@server(
+	group: popup
+	prefix: /internal/adminapi/sift/activity/pop
+	auth: false
+)
+service Sift {
+	@doc (
+		summary: "弹框列表"
+		description: "弹框列表"
+	)
+	@handler popList
+	post /list (PopupListReq) returns (PopupListResp)
+
+	@doc (
+		summary: "弹框保存"
+		description: "弹框保存"
+	)
+	@handler savePop
+	post /save (SavePopReq) returns (SavePopResp)
+
+	@doc (
+		summary: "弹框详情"
+		description: "弹框详情"
+	)
+	@handler popInfo
+	post /info (PopInfoReq) returns (PopInfoResp)
+
+	@doc (
+		summary: "弹框关闭"
+		description: "弹框关闭"
+	)
+	@handler closePop
+	post /close (ClosePopReq) returns (ClosePopResp)
+
+}

@@ -1,0 +1,39 @@
+{
+    "name": "go-zero-api-parser/go-zero-api-parser",
+    "description": "go-zero API 文件解析器 - 通过 PHP 调用 Go 可执行文件解析 .api 文件",
+    "type": "library",
+    "keywords": ["go-zero", "api", "parser", "php", "json"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Your Name",
+            "email": "your.email@example.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GoZeroApiParser\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GoZeroApiParser\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "build": "go build -o api-parser main.go"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

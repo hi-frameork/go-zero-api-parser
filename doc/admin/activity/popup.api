@@ -1,0 +1,179 @@
+syntax = "v1"
+
+type (
+    EnumPopType {
+        EnumPopTypeReq int32 `json:"-" val:"1"`  //请求弹窗
+        EnumPopTypePush int32 `json:"-" val:"2"` //推送弹窗
+    }
+    EnumGuildSet {
+        EnumGuildSetUnlimit int32 `json:"-" val:"0"`        //不限制
+        EnumGuildSetIsGuildUser int32 `json:"-" val:"1"`    //是公会主播
+        EnumGuildSetIsNotGuildUser int32 `json:"-" val:"2"` //不是公会主播
+    }
+    EnumGuildLeaderSet {
+        EnumGuildLeaderSetUnlimit int32 `json:"-" val:"0"`        //不限制
+        EnumGuildLeaderSetIsGuildUser int32 `json:"-" val:"1"`    //是公会长
+        EnumGuildLeaderSetIsNotGuildUser int32 `json:"-" val:"2"` //不是公会长
+    }
+    EnumPopupAction {
+        EnumPopupActionHome string `json:"-" val:"home"`                     //进入首页
+        EnumPopupActionPost string `json:"-" val:"post"`                     //动态页
+        EnumPopupActionChat string `json:"-" val:"chat"`                     //聊天列表页
+        EnumPopupActionRoomList string `json:"-" val:"room_list"`            //打开房间列表
+        EnumPopupActionMe string `json:"-" val:"me"`                         //进入me页面
+        EnumPopupActionGroupChat string `json:"-" val:"group_chat"`          //打开家族群聊
+        EnumPopupActionVoice string `json:"-" val:"voice"`                   //进入房间语音房
+        EnumPopupActionLive string `json:"-" val:"live"`                     //进入视频房
+        EnumPopupActionCreateVoice string `json:"-" val:"create_voice"`      //创建语音房
+        EnumPopupActionCreateLive string `json:"-" val:"create_live"`        //创建视频房
+        EnumPopupActionCloseVoice string `json:"-" val:"close_voice"`        //关闭语音房
+        EnumPopupActionCloseLive string `json:"-" val:"close_live"`          //关闭视频房
+        EnumPopupActionChargeSucc string `json:"-" val:"charge_succ"`        //充值成功
+        EnumPopupActionPanelSendGift string `json:"-" val:"panel_send_gift"` //在礼物面板送礼
+        EnumPopupActionSgInVoice string `json:"-" val:"sg_in_voice"`         //在语音房送礼
+        EnumPopupActionSgInLive string `json:"-" val:"sg_in_live"`           //在视频房送礼
+    }
+
+    EnumCoinAgentSet {
+        EnumCoinAgentSetUnlimit int32 `json:"-" val:"0"` //不限制
+        EnumCoinAgentSetIs int32 `json:"-" val:"1"`      //是币商或子代理
+        EnumCoinAgentSetIsNotr int32 `json:"-" val:"2"`  //普通用户
+    }
+
+    EnumStyleType {
+        EnumStyleTypeCustom int32 `json:"-" val:"1"` //自定义
+        EnumStyleTypeImg int32 `json:"-" val:"2"`    //图片弹窗
+    }
+
+    EnumTriggerCond {
+        EnumTriggerCondActivity int32 `json:"-" val:"1"` //活动触发
+    }
+)
+
+type (
+    PopupListReq {
+        Page int `json:"page"`                                     // 分页页码，从1开始
+        PageSize int `json:"page_size"`                            // 分页大小，默认20
+        Status int `json:"status,optional,options=0|1|2"`          // 状态 0未开始、1进行中、2已结束、3已关闭【is_enable = 0】
+        Gender int `json:"gender,optional,options=0|1|2"`          // 性别 0不限制 1男 2女
+        Country string `json:"country,optional"`                   // 国家筛选
+        Desc string `json:"desc,optional"`                         // 关键字/描述筛选
+        StartTime string `json:"start_time,optional"`              // 开始时间（格式：yyyy-MM-dd HH:mm:ss）
+        EndTime string `json:"end_time,optional"`                  // 结束时间（格式：yyyy-MM-dd HH:mm:ss）
+        PopupType EnumPopType `json:"popup_type"`                  // 弹窗类型 1-请求弹窗 2-推送弹窗
+        GuildSet EnumGuildSet `json:"guild_set"`                   //是否是工会主播 0-限制 1-是 2-否
+    }
+    PopupListResp {
+        List []PopupItem `json:"list"`
+        Total int `json:"total"`
+    }
+
+    PopupItem {
+        Id int64 `json:"id"`                                                         // 记录id
+        StyleType EnumStyleType `json:"style_type"`
+        ImgPop ImgPop `json:"img_pop,optional"`                                      //图片弹窗需要
+        ButtonColor string `json:"button_color,optional"`                            // 按钮颜色
+        ButtonKey string `json:"button_key,optional"`                                // 按钮key
+        ButtonSkipURL string `json:"button_skip_url,optional"`                       // 按钮跳转url
+        ContentColor string `json:"content_color,optional"`                          // 内容颜色
+        ContentKey string `json:"content_key,optional"`                              // 内容key
+        Country []string `json:"country,optional"`                                   // 国家
+        CountryType int64 `json:"country_type,options=0|1|2"`                        // 国家限制，0不限制 1黑名单 2白名单
+        DailyLimit int64 `json:"daily_limit"`                                        // 日上限
+        EndTime string `json:"end_time"`                                             // 结束时间
+        Gender int64 `json:"gender,options=0|1|2"`                                   // 性别，0不限制 1男 2女
+        PopData PopData `json:"pop_data"`                                            // 弹窗数据
+        PopupType int64 `json:"popup_type,options=1|2"`                              // 1-请求弹窗 2-推送弹窗
+        Remark string `json:"remark,optional"`                                       // 描述
+        Restriction int64 `json:"restriction,options=0|1|2"`                         // 用户限制，默认0不限制 1仅新用户 2仅老用户
+        Sort int64 `json:"sort"`                                                     // 排序，默认0
+        StartTime string `json:"start_time"`                                         // 开始时间
+        Status int64 `json:"status,options=0|1|2|3"`                                 // 状态，0未开始、1进行中、2已结束、3已关闭
+        TitleColor string `json:"title_color,optional"`                              // 标题颜色
+        TitleKey string `json:"title_key,optional"`                                  // 标题key
+        TopImg string `json:"top_img,optional"`                                      // 头图
+        BackgroundColor string `json:"background_color"`                             //弹窗背景颜色
+        BackgroundBoderColor string `json:"background_border_color"`                 //弹窗边框颜色
+        TotalLimit int64 `json:"total_limit"`                                        // 总上限
+        TriggerIntervalTime int64 `json:"trigger_interval_time"`                     // 触发时机时间间隔，单位分钟
+        Delay int64 `json:"delay"`                                                   // 延迟触发时间-秒
+                                                                                     //TriggerType int64 `json:"trigger_type,options=1|2"`            // 触发，1每次打开页面 2每次停留页面N分钟
+        TriggerCond EnumTriggerCond `json:"trigger_cond"`                            //触发条件 1-活动触发
+        Actions []EnumPopupAction `json:"actions"`                                   //触发动作
+        GuildSet EnumGuildSet `json:"guild_set"`                                     //是否是工会主播 0-限制 1-是 2-否
+        FirstJoinGuildDuration int64 `json:"first_join_guild_duration"`              //首次加入公会时长-天  0为不限制
+        FirstJoinGuildDurationNot int64 `json:"first_join_guild_duration_not"`       //首次加入公会时长(非)-天  0为不限制
+        GuildLeaderSet EnumGuildLeaderSet `json:"guild_leader_set"`                  //是否是工会长 0-限制 1-是 2-否
+        CoinAgentSet EnumCoinAgentSet `json:"coin_agent_set"`                        // 币商设置 0-不限制 1-是 2-否
+        AndroidAppVersion string `json:"android_app_version"`                        //安卓版本号限制，使用:分隔版本范围
+        IosAppVersion string `json:"ios_app_version"`                                //ios版本号限制，使用:分隔版本范围
+        ExtraData ExtraData `json:"extra_data"`                                      //拓展信息
+    }
+
+    ImgPop {
+        ImgUrl string `json:"img_url"` //弹窗图片key
+        Url string `json:"url"`        //弹窗图片跳转链接
+    }
+
+    PopData {
+        BtnStyle BtnStyle `json:"btn_style"`          // 弹窗按钮
+        GlobalStyle GlobalStyle `json:"global_style"` // 弹窗全局样式
+        TxtStyle TxtStyle `json:"txt_style"`          // 文字区域
+    }
+
+    BtnStyle {
+        BackgroundColor string `json:"background_color,optional"`  // 按钮颜色，支持上下渐变色，使用,分隔两种颜色
+        BorderColor string `json:"border_color,optional"`          // 按钮边框颜色
+        DescKey string `json:"desc_key"`                           // 按钮文案
+        URL string `json:"url,optional"`                           // 按钮跳转链接
+    }
+
+    GlobalStyle {
+        BorderColor string `json:"border_color,optional"`  // 边框颜色
+        Pic string `json:"pic"`                            // 弹窗上部图片
+        TopIcon string `json:"top_icon,optional"`          // 顶部皇冠图标
+    }
+
+    TxtStyle {
+        BackgroundColor string `json:"background_color"` // 文字区域背景颜色，支持上下渐变色，使用,分隔两种颜色
+        DescColor string `json:"desc_color"`             // 描述文案颜色
+        DescKey string `json:"desc_key"`                 // 描述文案
+        TitleColor string `json:"title_color"`           // 标题颜色
+        TitleKey string `json:"title_key"`               // 标题多语言key
+    }
+
+    SavePopReq {
+        PopupItem
+    }
+
+    ExtraData {
+        LeftButton LeftButton `json:"left_button"` // 左侧按钮
+    }
+
+    LeftButton {
+        BorderColor string `json:"border_color"`  // 边框颜色
+        ButtonColor string `json:"button_color"`  // 按钮颜色(,分割渐变色)
+        ButtonKey string `json:"button_key"`      // 按钮文案
+        URL string `json:"url"`                   // 跳转链接
+    }
+
+    SavePopResp {
+
+    }
+
+    PopInfoReq {
+        Id int64 `json:"id"`
+    }
+
+    PopInfoResp {
+        PopupItem
+    }
+
+    ClosePopReq {
+        Id int64 `json:"id"`
+    }
+
+    ClosePopResp {
+
+    }
+)

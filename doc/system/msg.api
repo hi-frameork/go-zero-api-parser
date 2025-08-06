@@ -1,0 +1,149 @@
+syntax = "v1"
+
+type (
+    EnumContentType {
+        EnumContentTypeText int32 `json:"-" val:"1"`      // 纯文本
+        EnumContentTypeTextLink int32 `json:"-" val:"2"`  // 文本+连接
+        EnumContentTypeTextImage int32 `json:"-" val:"3"` // 图片+文字
+        EnumContentTypeImage int32 `json:"-" val:"4"` // 图片
+    }
+
+    EnumCowdType {
+        EnumCowdTypeActive int32 `json:"-" val:"1"`  // 活跃用户【近7天】
+        EnumCowdTypeNewbie int32 `json:"-" val:"2"`  // 新人用户【近3天注册】
+        EnumCowdTypeSpecify int32 `json:"-" val:"3"` // 指定用户
+    }
+
+    EnumMsgType {
+        EnumMsgTypeOnce int32 `json:"-" val:"1"`      // 单次
+        EnumMsgTypeDailyLoop int32 `json:"-" val:"2"` // 天循环
+        EnumMsgTypeWeekLoop int32 `json:"-" val:"3"`  // 周循环
+    }
+
+    EnumGenderLimitType {
+        EnumGenderLimitTypeInit int32 `json:"-" val:"0"`   // 不限制
+        EnumGenderLimitTypeMale int32 `json:"-" val:"1"`   // 限制男
+        EnumGenderLimitTypeFemale int32 `json:"-" val:"2"` // 限制女
+    }
+
+    EnumAgencyLimitType {
+        EnumAgencyLimitTypeInit int32 `json:"-" val:"0"` // 不限制
+        EnumAgencyLimitTypeYes int32 `json:"-" val:"1"`  // 限制公会成员
+        EnumAgencyLimitTypeNot int32 `json:"-" val:"2"`  // 限制非公会成员
+    }
+
+    EnumCountryLimitType {
+        EnumCountryLimitTypeInit int32 `json:"-" val:"0"`  // 不限制国家
+        EnumCountryLimitTypeBlack int32 `json:"-" val:"1"` // 国家黑名单
+        EnumCountryLimitTypeWhite int32 `json:"-" val:"2"` // 国家白名单
+    }
+
+    SaveConfigReq {
+        Id int64 `json:"id,optional"`                                           // 记录id，编辑时必须
+        Title string `json:"title"`                                             // 消息标题
+        ContentType EnumContentType `json:"content_type"`                       // 消息内容类型 1纯文本 2文本+连接 3图文消息
+        ContentKey string `json:"content_key"`                                  // 消息内容key
+        Content string `json:"content"`                                         // 消息内容
+        HighlightTextKey int64 `json:"highlight_text_key,optional"`             // 高亮文本key，多个用英文逗号隔开，文本+连接消息必填
+        HighlightTextUrl string `json:"highlight_text_url,optional"`            // 高亮文本跳转连接，多个用英文逗号隔开，文本+连接消息必填
+        ImageKey string `json:"image_key,optional"`                             // 图片key，图文消息时必填
+        ImageUrl string `json:"image_url,optional"`                             // 图片路径
+        SkipUrl string `json:"skip_url"`                                        // 消息图片多语言key
+        CowdType EnumCowdType `json:"crowd_type"`                               // 用户圈定 1活跃用户 2新用户 3指定用户
+        NotifyChannel int32 `json:"notify_channel"`                             // 通知渠道 默认1系统通知 2官方号通知
+        OfficialUid int64 `json:"official_uid"`                                 // 官方号通知uid
+        MsgType EnumMsgType `json:"msg_type"`                                   // 消息类型 默认0单次 1每日循环 2每周循环
+        AssignUid string `json:"assign_uid,optional"`                           // 指定uid， 多个逗号隔开，指定用户时必填
+        GenderLimit EnumGenderLimitType `json:"gender_limit,optional"`          // 性别限制 默认0不限制 1仅男用户 2仅女用户
+        AgencyLimit EnumAgencyLimitType `json:"agency_limit,optional"`          // 公会限制 默认0不限制 1仅公会用户 2仅非公会用户
+        CountryLimit EnumCountryLimitType `json:"country_limit,optional"`       // 国家限制 默认0不限制 1黑名单 2白名单
+        CountryList string `json:"country_list,optional"`                       // 国家限制列表多个逗号隔开，国家限制时必填  eg:TH
+        AndroidMinVersionLimit string `json:"android_min_version_limit"`        // android限制最小版本号 默认空不限制, 最小000.000.000
+        AndroidMaxVersionLimit string `json:"android_max_version_limit"`        // android限制最大版本号 默认空不限制，最大999.999.999
+        IosMinVersionLimit string `json:"ios_min_version_limit"`                // ios限制最小版本号 默认空不限制, 最小000.000.000
+        IosMaxVersionLimit string `json:"ios_max_version_limit"`                // ios限制最大版本号 默认空不限制，最大999.999.999
+        PushFcm string `json:"push_fcm,optional"`                               // 推送fcm 默认0不推送 1推送
+        WeekDate string `json:"week_date,optional"`                             // 周循环具体周x 范围[1-7]对应周一至周日，周循环时必填
+        SingleTime int64 `json:"single_time,optional"`                          // 单次消息推送时间戳，精确至分钟，单次必填
+        CycleTime string `json:"cycle_time,optional"`                           // 循环消息设定时间 24小时格式：时-分 eg：09:00 天或周循环时必填
+        StartTime int64 `json:"start_time,optional"`                            // 循环消息有效开始时间戳，天或周循环时必填
+        EndTime int64 `json:"end_time,optional"`                                // 循环消息有效结束时间戳，天或周循环时必填
+    }
+
+    SaveConfigResp {
+        Id int64 `json:"id"` // 消息配置id
+    }
+
+
+    ConfigListReq {
+        Title string `json:"title,optional"`                         // 消息标题，支持模糊查询
+        ContentType EnumContentType `json:"content_type,optional"`   // 消息内容类型 1纯文本 2文本+连接 3图文消息
+        Status int32 `json:"status,optional"`                        // 消息状态 0:未激活 1:未开始【已激活】 2:进行中 3:已关闭（结束）
+        NotifyChannel int32 `json:"notify_channel,optional"`         // 通知渠道 默认1系统通知 2官方号通知
+    }
+
+    ConfigItem {
+        Id int64 `json:"id"`                                                               // 记录id，编辑时必须
+        Title string `json:"title"`                                                        // 消息标题
+        ContentType EnumContentType `json:"content_type"`                                  // 消息内容类型 1纯文本 2文本+连接 3图文消息
+        ContentKey string `json:"content_key"`                                             // 消息内容key
+        Content string `json:"content"`                                                    // 消息内容
+        HighlightTextKey int64 `json:"highlight_text_key"`                                 // 高亮文本key，多个用英文逗号隔开，文本+连接消息必填
+        HighlightTextUrl string `json:"highlight_text_url"`                                // 高亮文本跳转连接，多个用英文逗号隔开，文本+连接消息必填
+        ImageKey string `json:"image_key"`                                                 // 图片key，图文消息时必填
+        ImageUrl string `json:"image_url"`                                                 // 图片路径
+        SkipUrl string `json:"skip_url"`                                                   // 消息图片多语言key
+        CowdType EnumCowdType `json:"crowd_type"`                                          // 用户圈定 1活跃用户 2新用户 3指定用户
+        NotifyChannel int32 `json:"notify_channel"`                                        // 通知渠道 默认1系统通知 2官方号通知
+        OfficialUid int64 `json:"official_uid"`                                            // 官方号通知uid
+        MsgType EnumMsgType `json:"msg_type"`                                              // 消息类型 默认0单次 1每日循环 2每周循环
+        AssignUid string `json:"assign_uid"`                                               // 指定uid， 多个逗号隔开，指定用户时必填
+        GenderLimit EnumGenderLimitType `json:"gender_limit"`                              // 性别限制 默认0不限制 1仅男用户 2仅女用户
+        AgencyLimit EnumAgencyLimitType `json:"agency_limit"`                              // 公会限制 默认0不限制 1仅公会用户 2仅非公会用户
+        CountryLimit EnumCountryLimitType `json:"country_limit"`                           // 国家限制 默认0不限制 1黑名单 2白名单
+        CountryList string `json:"country_list"`                                           // 国家限制列表多个逗号隔开，国家限制时必填 eg:TH
+        AndroidMinVersionLimit string `json:"android_min_version_limit"`                   // android限制最小版本号 默认空不限制, 最小000.000.000
+        AndroidMaxVersionLimit string `json:"android_max_version_limit"`                   // android限制最大版本号 默认空不限制，最大999.999.999
+        IosMinVersionLimit string `json:"ios_min_version_limit"`                           // ios限制最小版本号 默认空不限制, 最小000.000.000
+        IosMaxVersionLimit string `json:"ios_max_version_limit"`                           // ios限制最大版本号 默认空不限制，最大999.999.999
+        PushFcm string `json:"push_fcm"`                                                   // 推送fcm 默认0不推送 1推送
+        WeekDate string `json:"week_date"`                                                 // 周循环具体周x 范围[1-7]对应周一至周日，周循环时必填
+        SingleTime int64 `json:"single_time"`                                              // 单次消息推送时间戳，精确至分钟，单次必填
+        CycleTime string `json:"cycle_time"`                                               // 循环消息设定时间 24小时格式：时-分 eg：09:00 天或周循环时必填
+        StartTime int64 `json:"start_time"`                                                // 循环消息有效开始时间戳，天或周循环时必填
+        EndTime int64 `json:"end_time"`                                                    // 循环消息有效结束时间戳，天或周循环时必填
+        Status int32 `json:"status"`                                                       // 消息状态 0:未激活 1:未开始【已激活】 2:进行中 3:已关闭（结束）
+        CreatedAt string `json:"created_at"`                                               // 创建时间
+        UpdatedAt string `json:"updated_at"`                                               // 最后更新时间
+    }
+
+    ConfigListResp {
+       Total int64 `json:"total"` // 总数
+       List[] ConfigItem `json:"list"` // 列表
+    }
+
+    EnumStatus {
+        EnumStatusActivated int32 `json:"-" val:"1"` // 激活
+        EnumStatusClosed int32 `json:"-" val:"3"`    // 关闭
+        EnumStatusDeleted int32 `json:"-" val:"4"`   // 删除
+    }
+
+    ChangeStatusReq {
+        Id int64 `json:"id"`                         // 记录id，编辑时必须
+        Status EnumStatus `json:"status"`            // 消息标题
+    }
+
+    ChangeStatusResp {
+        Id int64 `json:"id"` // 消息配置id
+    }
+
+    OfficialListReq {}
+
+    OfficialListResp {
+        UserId int64 `json:"user_id"`                     // 官方号uid
+        OwnerName string `json:"owner_name"`              // 归属人
+        Type int32 `json:"type"`                          // 官方号类型 1官方运营号 5官方local 6官方客服号
+        Country string `json:"country"`                   // 官方号国家
+        CountryCode string `json:"country_code"`          // 官方号国家code
+    }
+)
