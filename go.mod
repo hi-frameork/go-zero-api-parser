@@ -1,4 +1,4 @@
-module go-zero-api-parser
+module github.com/hi-framework/go-zero-api-parser
 
 go 1.21
 
