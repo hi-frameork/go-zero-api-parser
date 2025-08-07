@@ -1,0 +1,3496 @@
+{
+    "Info": {
+        "Title": "商品服务接口",
+        "Desc": "电商商品管理API",
+        "Version": "v2.0",
+        "Author": "产品团队",
+        "Email": "product@example.com",
+        "Properties": {
+            "author": "产品团队",
+            "desc": "电商商品管理API",
+            "email": "product@example.com",
+            "title": "商品服务接口",
+            "version": "v2.0"
+        }
+    },
+    "Syntax": {
+        "Version": "",
+        "Doc": null,
+        "Comment": null
+    },
+    "Imports": null,
+    "Types": [
+        {
+            "RawName": "BatchOperationReq",
+            "Members": [
+                {
+                    "Name": "ProductIds",
+                    "Type": {
+                        "RawName": "[]int64",
+                        "Value": {
+                            "RawName": "int64"
+                        }
+                    },
+                    "Tag": "`json:\"product_ids\"`",
+                    "Comment": "// 商品ID列表",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Operation",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"operation\"`",
+                    "Comment": "// 操作类型：delete/activate/deactivate",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 批量操作请求"
+            ]
+        },
+        {
+            "RawName": "Category",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 分类ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Name",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"name\"`",
+                    "Comment": "// 分类名称",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Description",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"description\"`",
+                    "Comment": "// 分类描述",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ParentId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"parent_id\"`",
+                    "Comment": "// 父分类ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Level",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"level\"`",
+                    "Comment": "// 分类层级",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "SortOrder",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"sort_order\"`",
+                    "Comment": "// 排序",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "IsActive",
+                    "Type": {
+                        "RawName": "bool"
+                    },
+                    "Tag": "`json:\"is_active\"`",
+                    "Comment": "// 是否激活",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CreatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"created_at\"`",
+                    "Comment": "// 创建时间",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 商品分类"
+            ]
+        },
+        {
+            "RawName": "CreateProductReq",
+            "Members": [
+                {
+                    "Name": "Name",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"name\"`",
+                    "Comment": "// 商品名称",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Description",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"description\"`",
+                    "Comment": "// 商品描述",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CategoryId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"category_id\"`",
+                    "Comment": "// 分类ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Price",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"price\"`",
+                    "Comment": "// 价格",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OriginalPrice",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"original_price,optional\"`",
+                    "Comment": "// 原价",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Stock",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"stock\"`",
+                    "Comment": "// 库存",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Images",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"images,optional\"`",
+                    "Comment": "// 商品图片",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Tags",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"tags,optional\"`",
+                    "Comment": "// 商品标签",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Weight",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"weight,optional\"`",
+                    "Comment": "// 重量",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Dimensions",
+                    "Type": {
+                        "RawName": "ProductDimensions",
+                        "Members": [
+                            {
+                                "Name": "Length",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"length\"`",
+                                "Comment": "// 长度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Width",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"width\"`",
+                                "Comment": "// 宽度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Height",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"height\"`",
+                                "Comment": "// 高度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 商品尺寸"
+                        ]
+                    },
+                    "Tag": "`json:\"dimensions,optional\"`",
+                    "Comment": "// 尺寸",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 创建商品请求"
+            ]
+        },
+        {
+            "RawName": "GetProductReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 商品ID",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 获取商品请求"
+            ]
+        },
+        {
+            "RawName": "GetProductsReq",
+            "Members": [
+                {
+                    "Name": "Page",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"page,optional,default=1\"`",
+                    "Comment": "// 页码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Size",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"size,optional,default=20\"`",
+                    "Comment": "// 每页大小",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CategoryId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"category_id,optional\"`",
+                    "Comment": "// 分类ID筛选",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Keyword",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"keyword,optional\"`",
+                    "Comment": "// 搜索关键词",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"status,optional\"`",
+                    "Comment": "// 状态筛选",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "MinPrice",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"min_price,optional\"`",
+                    "Comment": "// 最低价格",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "MaxPrice",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"max_price,optional\"`",
+                    "Comment": "// 最高价格",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "SortBy",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"sort_by,optional\"`",
+                    "Comment": "// 排序字段",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "SortOrder",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"sort_order,optional\"`",
+                    "Comment": "// 排序方向",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 商品列表请求"
+            ]
+        },
+        {
+            "RawName": "GetProductsResp",
+            "Members": [
+                {
+                    "Name": "Total",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"total\"`",
+                    "Comment": "// 总数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "List",
+                    "Type": {
+                        "RawName": "[]Product",
+                        "Value": {
+                            "RawName": "Product",
+                            "Members": null,
+                            "Docs": null
+                        }
+                    },
+                    "Tag": "`json:\"list\"`",
+                    "Comment": "// 商品列表",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Categories",
+                    "Type": {
+                        "RawName": "[]Category",
+                        "Value": {
+                            "RawName": "Category",
+                            "Members": null,
+                            "Docs": null
+                        }
+                    },
+                    "Tag": "`json:\"categories\"`",
+                    "Comment": "// 分类列表",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 商品列表响应"
+            ]
+        },
+        {
+            "RawName": "Product",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 商品ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Name",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"name\"`",
+                    "Comment": "// 商品名称",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Description",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"description\"`",
+                    "Comment": "// 商品描述",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CategoryId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"category_id\"`",
+                    "Comment": "// 分类ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Category",
+                    "Type": {
+                        "RawName": "Category",
+                        "Members": [
+                            {
+                                "Name": "Id",
+                                "Type": {
+                                    "RawName": "int64"
+                                },
+                                "Tag": "`json:\"id\"`",
+                                "Comment": "// 分类ID",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Name",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"name\"`",
+                                "Comment": "// 分类名称",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Description",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"description\"`",
+                                "Comment": "// 分类描述",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "ParentId",
+                                "Type": {
+                                    "RawName": "int64"
+                                },
+                                "Tag": "`json:\"parent_id\"`",
+                                "Comment": "// 父分类ID",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Level",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"level\"`",
+                                "Comment": "// 分类层级",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "SortOrder",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"sort_order\"`",
+                                "Comment": "// 排序",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "IsActive",
+                                "Type": {
+                                    "RawName": "bool"
+                                },
+                                "Tag": "`json:\"is_active\"`",
+                                "Comment": "// 是否激活",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "CreatedAt",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"created_at\"`",
+                                "Comment": "// 创建时间",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 商品分类"
+                        ]
+                    },
+                    "Tag": "`json:\"category\"`",
+                    "Comment": "// 分类信息",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Price",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"price\"`",
+                    "Comment": "// 价格",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OriginalPrice",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"original_price\"`",
+                    "Comment": "// 原价",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Stock",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"stock\"`",
+                    "Comment": "// 库存",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Images",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"images\"`",
+                    "Comment": "// 商品图片",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Tags",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"tags\"`",
+                    "Comment": "// 商品标签",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "ProductStatus",
+                        "Members": [
+                            {
+                                "Name": "ProductStatusDraft",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"0\"`",
+                                "Comment": "// 草稿",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "ProductStatusActive",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"1\"`",
+                                "Comment": "// 上架",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "ProductStatusInactive",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"2\"`",
+                                "Comment": "// 下架",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "ProductStatusOutOfStock",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"3\"`",
+                                "Comment": "// 缺货",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 商品状态枚举"
+                        ]
+                    },
+                    "Tag": "`json:\"status\"`",
+                    "Comment": "// 商品状态",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Weight",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"weight,optional\"`",
+                    "Comment": "// 重量（克）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Dimensions",
+                    "Type": {
+                        "RawName": "ProductDimensions",
+                        "Members": [
+                            {
+                                "Name": "Length",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"length\"`",
+                                "Comment": "// 长度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Width",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"width\"`",
+                                "Comment": "// 宽度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Height",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"height\"`",
+                                "Comment": "// 高度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 商品尺寸"
+                        ]
+                    },
+                    "Tag": "`json:\"dimensions,optional\"`",
+                    "Comment": "// 尺寸",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CreatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"created_at\"`",
+                    "Comment": "// 创建时间",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UpdatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"updated_at\"`",
+                    "Comment": "// 更新时间",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 商品信息"
+            ]
+        },
+        {
+            "RawName": "ProductDimensions",
+            "Members": [
+                {
+                    "Name": "Length",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"length\"`",
+                    "Comment": "// 长度（厘米）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Width",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"width\"`",
+                    "Comment": "// 宽度（厘米）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Height",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"height\"`",
+                    "Comment": "// 高度（厘米）",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 商品尺寸"
+            ]
+        },
+        {
+            "RawName": "ProductStatus",
+            "Members": [
+                {
+                    "Name": "ProductStatusDraft",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"0\"`",
+                    "Comment": "// 草稿",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ProductStatusActive",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"1\"`",
+                    "Comment": "// 上架",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ProductStatusInactive",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"2\"`",
+                    "Comment": "// 下架",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ProductStatusOutOfStock",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"3\"`",
+                    "Comment": "// 缺货",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 商品状态枚举"
+            ]
+        },
+        {
+            "RawName": "UpdateProductReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 商品ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Name",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"name,optional\"`",
+                    "Comment": "// 商品名称",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Description",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"description,optional\"`",
+                    "Comment": "// 商品描述",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CategoryId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"category_id,optional\"`",
+                    "Comment": "// 分类ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Price",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"price,optional\"`",
+                    "Comment": "// 价格",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OriginalPrice",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"original_price,optional\"`",
+                    "Comment": "// 原价",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Stock",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"stock,optional\"`",
+                    "Comment": "// 库存",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Images",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"images,optional\"`",
+                    "Comment": "// 商品图片",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Tags",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"tags,optional\"`",
+                    "Comment": "// 商品标签",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"status,optional\"`",
+                    "Comment": "// 商品状态",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Weight",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"weight,optional\"`",
+                    "Comment": "// 重量",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Dimensions",
+                    "Type": {
+                        "RawName": "ProductDimensions",
+                        "Members": [
+                            {
+                                "Name": "Length",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"length\"`",
+                                "Comment": "// 长度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Width",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"width\"`",
+                                "Comment": "// 宽度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Height",
+                                "Type": {
+                                    "RawName": "float64"
+                                },
+                                "Tag": "`json:\"height\"`",
+                                "Comment": "// 高度（厘米）",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 商品尺寸"
+                        ]
+                    },
+                    "Tag": "`json:\"dimensions,optional\"`",
+                    "Comment": "// 尺寸",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 更新商品请求"
+            ]
+        },
+        {
+            "RawName": "UpdateStockReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 商品ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Stock",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"stock\"`",
+                    "Comment": "// 新库存数量",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Operation",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"operation\"`",
+                    "Comment": "// 操作类型：set/add/subtract",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 库存更新请求"
+            ]
+        }
+    ],
+    "Service": {
+        "Name": "ProductService",
+        "Groups": [
+            {
+                "Annotation": {
+                    "Properties": {
+                        "group": "product",
+                        "middleware": "Auth,RateLimit",
+                        "prefix": "/api/v2/products"
+                    }
+                },
+                "Routes": [
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/",
+                        "RequestType": {
+                            "RawName": "CreateProductReq",
+                            "Members": [
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 商品名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Description",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"description\"`",
+                                    "Comment": "// 商品描述",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id\"`",
+                                    "Comment": "// 分类ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Price",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"price\"`",
+                                    "Comment": "// 价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OriginalPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"original_price,optional\"`",
+                                    "Comment": "// 原价",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock\"`",
+                                    "Comment": "// 库存",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Images",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"images,optional\"`",
+                                    "Comment": "// 商品图片",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Tags",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"tags,optional\"`",
+                                    "Comment": "// 商品标签",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Weight",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"weight,optional\"`",
+                                    "Comment": "// 重量",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dimensions",
+                                    "Type": {
+                                        "RawName": "ProductDimensions",
+                                        "Members": [
+                                            {
+                                                "Name": "Length",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"length\"`",
+                                                "Comment": "// 长度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Width",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"width\"`",
+                                                "Comment": "// 宽度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Height",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"height\"`",
+                                                "Comment": "// 高度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品尺寸"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"dimensions,optional\"`",
+                                    "Comment": "// 尺寸",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 创建商品请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Product",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 商品名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Description",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"description\"`",
+                                    "Comment": "// 商品描述",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id\"`",
+                                    "Comment": "// 分类ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Category",
+                                    "Type": {
+                                        "RawName": "Category",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Name",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"name\"`",
+                                                "Comment": "// 分类名称",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Description",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"description\"`",
+                                                "Comment": "// 分类描述",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ParentId",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"parent_id\"`",
+                                                "Comment": "// 父分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Level",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"level\"`",
+                                                "Comment": "// 分类层级",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "SortOrder",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"sort_order\"`",
+                                                "Comment": "// 排序",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsActive",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_active\"`",
+                                                "Comment": "// 是否激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "CreatedAt",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"created_at\"`",
+                                                "Comment": "// 创建时间",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品分类"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"category\"`",
+                                    "Comment": "// 分类信息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Price",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"price\"`",
+                                    "Comment": "// 价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OriginalPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"original_price\"`",
+                                    "Comment": "// 原价",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock\"`",
+                                    "Comment": "// 库存",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Images",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"images\"`",
+                                    "Comment": "// 商品图片",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Tags",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"tags\"`",
+                                    "Comment": "// 商品标签",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "ProductStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "ProductStatusDraft",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"0\"`",
+                                                "Comment": "// 草稿",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusActive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 上架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusInactive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 下架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusOutOfStock",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 缺货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 商品状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Weight",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"weight,optional\"`",
+                                    "Comment": "// 重量（克）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dimensions",
+                                    "Type": {
+                                        "RawName": "ProductDimensions",
+                                        "Members": [
+                                            {
+                                                "Name": "Length",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"length\"`",
+                                                "Comment": "// 长度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Width",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"width\"`",
+                                                "Comment": "// 宽度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Height",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"height\"`",
+                                                "Comment": "// 高度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品尺寸"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"dimensions,optional\"`",
+                                    "Comment": "// 尺寸",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "createProduct",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "添加新的商品到系统中",
+                                "summary": "创建商品"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/",
+                        "RequestType": {
+                            "RawName": "GetProductsReq",
+                            "Members": [
+                                {
+                                    "Name": "Page",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"page,optional,default=1\"`",
+                                    "Comment": "// 页码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Size",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"size,optional,default=20\"`",
+                                    "Comment": "// 每页大小",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id,optional\"`",
+                                    "Comment": "// 分类ID筛选",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Keyword",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"keyword,optional\"`",
+                                    "Comment": "// 搜索关键词",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"status,optional\"`",
+                                    "Comment": "// 状态筛选",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "MinPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"min_price,optional\"`",
+                                    "Comment": "// 最低价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "MaxPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"max_price,optional\"`",
+                                    "Comment": "// 最高价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "SortBy",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"sort_by,optional\"`",
+                                    "Comment": "// 排序字段",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "SortOrder",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"sort_order,optional\"`",
+                                    "Comment": "// 排序方向",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品列表请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "GetProductsResp",
+                            "Members": [
+                                {
+                                    "Name": "Total",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"total\"`",
+                                    "Comment": "// 总数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "List",
+                                    "Type": {
+                                        "RawName": "[]Product",
+                                        "Value": {
+                                            "RawName": "Product",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"list\"`",
+                                    "Comment": "// 商品列表",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Categories",
+                                    "Type": {
+                                        "RawName": "[]Category",
+                                        "Value": {
+                                            "RawName": "Category",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"categories\"`",
+                                    "Comment": "// 分类列表",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品列表响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getProducts",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "分页获取商品列表，支持多种筛选和排序",
+                                "summary": "获取商品列表"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/:id",
+                        "RequestType": {
+                            "RawName": "GetProductReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 获取商品请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Product",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 商品名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Description",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"description\"`",
+                                    "Comment": "// 商品描述",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id\"`",
+                                    "Comment": "// 分类ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Category",
+                                    "Type": {
+                                        "RawName": "Category",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Name",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"name\"`",
+                                                "Comment": "// 分类名称",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Description",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"description\"`",
+                                                "Comment": "// 分类描述",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ParentId",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"parent_id\"`",
+                                                "Comment": "// 父分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Level",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"level\"`",
+                                                "Comment": "// 分类层级",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "SortOrder",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"sort_order\"`",
+                                                "Comment": "// 排序",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsActive",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_active\"`",
+                                                "Comment": "// 是否激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "CreatedAt",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"created_at\"`",
+                                                "Comment": "// 创建时间",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品分类"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"category\"`",
+                                    "Comment": "// 分类信息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Price",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"price\"`",
+                                    "Comment": "// 价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OriginalPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"original_price\"`",
+                                    "Comment": "// 原价",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock\"`",
+                                    "Comment": "// 库存",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Images",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"images\"`",
+                                    "Comment": "// 商品图片",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Tags",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"tags\"`",
+                                    "Comment": "// 商品标签",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "ProductStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "ProductStatusDraft",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"0\"`",
+                                                "Comment": "// 草稿",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusActive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 上架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusInactive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 下架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusOutOfStock",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 缺货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 商品状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Weight",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"weight,optional\"`",
+                                    "Comment": "// 重量（克）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dimensions",
+                                    "Type": {
+                                        "RawName": "ProductDimensions",
+                                        "Members": [
+                                            {
+                                                "Name": "Length",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"length\"`",
+                                                "Comment": "// 长度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Width",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"width\"`",
+                                                "Comment": "// 宽度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Height",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"height\"`",
+                                                "Comment": "// 高度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品尺寸"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"dimensions,optional\"`",
+                                    "Comment": "// 尺寸",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getProduct",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "根据商品ID获取商品详细信息",
+                                "summary": "获取商品详情"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "put",
+                        "Path": "/:id",
+                        "RequestType": {
+                            "RawName": "UpdateProductReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name,optional\"`",
+                                    "Comment": "// 商品名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Description",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"description,optional\"`",
+                                    "Comment": "// 商品描述",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id,optional\"`",
+                                    "Comment": "// 分类ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Price",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"price,optional\"`",
+                                    "Comment": "// 价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OriginalPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"original_price,optional\"`",
+                                    "Comment": "// 原价",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock,optional\"`",
+                                    "Comment": "// 库存",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Images",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"images,optional\"`",
+                                    "Comment": "// 商品图片",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Tags",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"tags,optional\"`",
+                                    "Comment": "// 商品标签",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"status,optional\"`",
+                                    "Comment": "// 商品状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Weight",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"weight,optional\"`",
+                                    "Comment": "// 重量",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dimensions",
+                                    "Type": {
+                                        "RawName": "ProductDimensions",
+                                        "Members": [
+                                            {
+                                                "Name": "Length",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"length\"`",
+                                                "Comment": "// 长度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Width",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"width\"`",
+                                                "Comment": "// 宽度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Height",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"height\"`",
+                                                "Comment": "// 高度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品尺寸"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"dimensions,optional\"`",
+                                    "Comment": "// 尺寸",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 更新商品请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Product",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 商品名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Description",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"description\"`",
+                                    "Comment": "// 商品描述",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id\"`",
+                                    "Comment": "// 分类ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Category",
+                                    "Type": {
+                                        "RawName": "Category",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Name",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"name\"`",
+                                                "Comment": "// 分类名称",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Description",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"description\"`",
+                                                "Comment": "// 分类描述",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ParentId",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"parent_id\"`",
+                                                "Comment": "// 父分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Level",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"level\"`",
+                                                "Comment": "// 分类层级",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "SortOrder",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"sort_order\"`",
+                                                "Comment": "// 排序",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsActive",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_active\"`",
+                                                "Comment": "// 是否激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "CreatedAt",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"created_at\"`",
+                                                "Comment": "// 创建时间",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品分类"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"category\"`",
+                                    "Comment": "// 分类信息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Price",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"price\"`",
+                                    "Comment": "// 价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OriginalPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"original_price\"`",
+                                    "Comment": "// 原价",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock\"`",
+                                    "Comment": "// 库存",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Images",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"images\"`",
+                                    "Comment": "// 商品图片",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Tags",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"tags\"`",
+                                    "Comment": "// 商品标签",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "ProductStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "ProductStatusDraft",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"0\"`",
+                                                "Comment": "// 草稿",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusActive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 上架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusInactive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 下架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusOutOfStock",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 缺货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 商品状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Weight",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"weight,optional\"`",
+                                    "Comment": "// 重量（克）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dimensions",
+                                    "Type": {
+                                        "RawName": "ProductDimensions",
+                                        "Members": [
+                                            {
+                                                "Name": "Length",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"length\"`",
+                                                "Comment": "// 长度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Width",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"width\"`",
+                                                "Comment": "// 宽度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Height",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"height\"`",
+                                                "Comment": "// 高度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品尺寸"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"dimensions,optional\"`",
+                                    "Comment": "// 尺寸",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "updateProduct",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "更新商品的基本信息和属性",
+                                "summary": "更新商品信息"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "delete",
+                        "Path": "/:id",
+                        "RequestType": {
+                            "RawName": "GetProductReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 获取商品请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Product",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 商品名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Description",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"description\"`",
+                                    "Comment": "// 商品描述",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id\"`",
+                                    "Comment": "// 分类ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Category",
+                                    "Type": {
+                                        "RawName": "Category",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Name",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"name\"`",
+                                                "Comment": "// 分类名称",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Description",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"description\"`",
+                                                "Comment": "// 分类描述",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ParentId",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"parent_id\"`",
+                                                "Comment": "// 父分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Level",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"level\"`",
+                                                "Comment": "// 分类层级",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "SortOrder",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"sort_order\"`",
+                                                "Comment": "// 排序",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsActive",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_active\"`",
+                                                "Comment": "// 是否激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "CreatedAt",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"created_at\"`",
+                                                "Comment": "// 创建时间",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品分类"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"category\"`",
+                                    "Comment": "// 分类信息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Price",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"price\"`",
+                                    "Comment": "// 价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OriginalPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"original_price\"`",
+                                    "Comment": "// 原价",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock\"`",
+                                    "Comment": "// 库存",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Images",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"images\"`",
+                                    "Comment": "// 商品图片",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Tags",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"tags\"`",
+                                    "Comment": "// 商品标签",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "ProductStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "ProductStatusDraft",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"0\"`",
+                                                "Comment": "// 草稿",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusActive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 上架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusInactive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 下架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusOutOfStock",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 缺货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 商品状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Weight",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"weight,optional\"`",
+                                    "Comment": "// 重量（克）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dimensions",
+                                    "Type": {
+                                        "RawName": "ProductDimensions",
+                                        "Members": [
+                                            {
+                                                "Name": "Length",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"length\"`",
+                                                "Comment": "// 长度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Width",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"width\"`",
+                                                "Comment": "// 宽度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Height",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"height\"`",
+                                                "Comment": "// 高度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品尺寸"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"dimensions,optional\"`",
+                                    "Comment": "// 尺寸",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "deleteProduct",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "删除指定的商品",
+                                "summary": "删除商品"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "patch",
+                        "Path": "/:id/stock",
+                        "RequestType": {
+                            "RawName": "UpdateStockReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock\"`",
+                                    "Comment": "// 新库存数量",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Operation",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"operation\"`",
+                                    "Comment": "// 操作类型：set/add/subtract",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 库存更新请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Product",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 商品ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 商品名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Description",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"description\"`",
+                                    "Comment": "// 商品描述",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CategoryId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"category_id\"`",
+                                    "Comment": "// 分类ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Category",
+                                    "Type": {
+                                        "RawName": "Category",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Name",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"name\"`",
+                                                "Comment": "// 分类名称",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Description",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"description\"`",
+                                                "Comment": "// 分类描述",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ParentId",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"parent_id\"`",
+                                                "Comment": "// 父分类ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Level",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"level\"`",
+                                                "Comment": "// 分类层级",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "SortOrder",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"sort_order\"`",
+                                                "Comment": "// 排序",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsActive",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_active\"`",
+                                                "Comment": "// 是否激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "CreatedAt",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"created_at\"`",
+                                                "Comment": "// 创建时间",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品分类"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"category\"`",
+                                    "Comment": "// 分类信息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Price",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"price\"`",
+                                    "Comment": "// 价格",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OriginalPrice",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"original_price\"`",
+                                    "Comment": "// 原价",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Stock",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"stock\"`",
+                                    "Comment": "// 库存",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Images",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"images\"`",
+                                    "Comment": "// 商品图片",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Tags",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"tags\"`",
+                                    "Comment": "// 商品标签",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "ProductStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "ProductStatusDraft",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"0\"`",
+                                                "Comment": "// 草稿",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusActive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 上架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusInactive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 下架",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ProductStatusOutOfStock",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 缺货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 商品状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Weight",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"weight,optional\"`",
+                                    "Comment": "// 重量（克）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dimensions",
+                                    "Type": {
+                                        "RawName": "ProductDimensions",
+                                        "Members": [
+                                            {
+                                                "Name": "Length",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"length\"`",
+                                                "Comment": "// 长度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Width",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"width\"`",
+                                                "Comment": "// 宽度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Height",
+                                                "Type": {
+                                                    "RawName": "float64"
+                                                },
+                                                "Tag": "`json:\"height\"`",
+                                                "Comment": "// 高度（厘米）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 商品尺寸"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"dimensions,optional\"`",
+                                    "Comment": "// 尺寸",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "updateStock",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "更新商品的库存数量",
+                                "summary": "更新商品库存"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/batch",
+                        "RequestType": {
+                            "RawName": "BatchOperationReq",
+                            "Members": [
+                                {
+                                    "Name": "ProductIds",
+                                    "Type": {
+                                        "RawName": "[]int64",
+                                        "Value": {
+                                            "RawName": "int64"
+                                        }
+                                    },
+                                    "Tag": "`json:\"product_ids\"`",
+                                    "Comment": "// 商品ID列表",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Operation",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"operation\"`",
+                                    "Comment": "// 操作类型：delete/activate/deactivate",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 批量操作请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "GetProductsResp",
+                            "Members": [
+                                {
+                                    "Name": "Total",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"total\"`",
+                                    "Comment": "// 总数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "List",
+                                    "Type": {
+                                        "RawName": "[]Product",
+                                        "Value": {
+                                            "RawName": "Product",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"list\"`",
+                                    "Comment": "// 商品列表",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Categories",
+                                    "Type": {
+                                        "RawName": "[]Category",
+                                        "Value": {
+                                            "RawName": "Category",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"categories\"`",
+                                    "Comment": "// 分类列表",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 商品列表响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "batchOperation",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "对多个商品执行批量操作",
+                                "summary": "批量操作商品"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    }
+                ]
+            }
+        ]
+    }
+}

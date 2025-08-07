@@ -1,0 +1,1431 @@
+{
+    "Info": {
+        "Title": "用户服务接口",
+        "Desc": "用户管理相关的API接口",
+        "Version": "v1.0",
+        "Author": "开发团队",
+        "Email": "dev@example.com",
+        "Properties": {
+            "author": "开发团队",
+            "desc": "用户管理相关的API接口",
+            "email": "dev@example.com",
+            "title": "用户服务接口",
+            "version": "v1.0"
+        }
+    },
+    "Syntax": {
+        "Version": "",
+        "Doc": null,
+        "Comment": null
+    },
+    "Imports": null,
+    "Types": [
+        {
+            "RawName": "CommonResp",
+            "Members": [
+                {
+                    "Name": "Code",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"code\"`",
+                    "Comment": "// 响应码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Message",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"message\"`",
+                    "Comment": "// 响应消息",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 通用响应"
+            ]
+        },
+        {
+            "RawName": "DeleteUserReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 删除用户请求"
+            ]
+        },
+        {
+            "RawName": "GetUserReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 获取用户信息请求"
+            ]
+        },
+        {
+            "RawName": "GetUsersReq",
+            "Members": [
+                {
+                    "Name": "Page",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"page,optional,default=1\"`",
+                    "Comment": "// 页码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Size",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"size,optional,default=10\"`",
+                    "Comment": "// 每页大小",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Keyword",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"keyword,optional\"`",
+                    "Comment": "// 搜索关键词",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"status,optional\"`",
+                    "Comment": "// 用户状态筛选",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户列表请求"
+            ]
+        },
+        {
+            "RawName": "GetUsersResp",
+            "Members": [
+                {
+                    "Name": "Total",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"total\"`",
+                    "Comment": "// 总数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "List",
+                    "Type": {
+                        "RawName": "[]User",
+                        "Value": {
+                            "RawName": "User",
+                            "Members": null,
+                            "Docs": null
+                        }
+                    },
+                    "Tag": "`json:\"list\"`",
+                    "Comment": "// 用户列表",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户列表响应"
+            ]
+        },
+        {
+            "RawName": "LoginReq",
+            "Members": [
+                {
+                    "Name": "Username",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"username\"`",
+                    "Comment": "// 用户名或邮箱",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Password",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"password\"`",
+                    "Comment": "// 密码",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户登录请求"
+            ]
+        },
+        {
+            "RawName": "LoginResp",
+            "Members": [
+                {
+                    "Name": "User",
+                    "Type": {
+                        "RawName": "User",
+                        "Members": [
+                            {
+                                "Name": "Id",
+                                "Type": {
+                                    "RawName": "int64"
+                                },
+                                "Tag": "`json:\"id\"`",
+                                "Comment": "// 用户ID",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Username",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"username\"`",
+                                "Comment": "// 用户名",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Email",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"email\"`",
+                                "Comment": "// 邮箱",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Phone",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"phone,optional\"`",
+                                "Comment": "// 手机号（可选）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Avatar",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"avatar,optional\"`",
+                                "Comment": "// 头像URL（可选）",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Status",
+                                "Type": {
+                                    "RawName": "UserStatus",
+                                    "Members": null,
+                                    "Docs": null
+                                },
+                                "Tag": "`json:\"status\"`",
+                                "Comment": "// 用户状态",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "CreatedAt",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"created_at\"`",
+                                "Comment": "// 创建时间",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "UpdatedAt",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"updated_at\"`",
+                                "Comment": "// 更新时间",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 用户信息"
+                        ]
+                    },
+                    "Tag": "`json:\"user\"`",
+                    "Comment": "// 用户信息",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Token",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"token\"`",
+                    "Comment": "// JWT令牌",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ExpiresAt",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"expires_at\"`",
+                    "Comment": "// 过期时间戳",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户登录响应"
+            ]
+        },
+        {
+            "RawName": "RegisterReq",
+            "Members": [
+                {
+                    "Name": "Username",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"username\"`",
+                    "Comment": "// 用户名",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Email",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"email\"`",
+                    "Comment": "// 邮箱",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Password",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"password\"`",
+                    "Comment": "// 密码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Phone",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"phone,optional\"`",
+                    "Comment": "// 手机号（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户注册请求"
+            ]
+        },
+        {
+            "RawName": "RegisterResp",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Token",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"token\"`",
+                    "Comment": "// JWT令牌",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户注册响应"
+            ]
+        },
+        {
+            "RawName": "UpdateUserReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Username",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"username,optional\"`",
+                    "Comment": "// 用户名（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Email",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"email,optional\"`",
+                    "Comment": "// 邮箱（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Phone",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"phone,optional\"`",
+                    "Comment": "// 手机号（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Avatar",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"avatar,optional\"`",
+                    "Comment": "// 头像URL（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 更新用户信息请求"
+            ]
+        },
+        {
+            "RawName": "User",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Username",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"username\"`",
+                    "Comment": "// 用户名",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Email",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"email\"`",
+                    "Comment": "// 邮箱",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Phone",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"phone,optional\"`",
+                    "Comment": "// 手机号（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Avatar",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"avatar,optional\"`",
+                    "Comment": "// 头像URL（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "UserStatus",
+                        "Members": [
+                            {
+                                "Name": "UserStatusActive",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"1\"`",
+                                "Comment": "// 激活",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "UserStatusInactive",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"2\"`",
+                                "Comment": "// 未激活",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "UserStatusBlocked",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"3\"`",
+                                "Comment": "// 已封禁",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 用户状态枚举"
+                        ]
+                    },
+                    "Tag": "`json:\"status\"`",
+                    "Comment": "// 用户状态",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CreatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"created_at\"`",
+                    "Comment": "// 创建时间",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UpdatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"updated_at\"`",
+                    "Comment": "// 更新时间",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户信息"
+            ]
+        },
+        {
+            "RawName": "UserStatus",
+            "Members": [
+                {
+                    "Name": "UserStatusActive",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"1\"`",
+                    "Comment": "// 激活",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UserStatusInactive",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"2\"`",
+                    "Comment": "// 未激活",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UserStatusBlocked",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"3\"`",
+                    "Comment": "// 已封禁",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户状态枚举"
+            ]
+        }
+    ],
+    "Service": {
+        "Name": "UserService",
+        "Groups": [
+            {
+                "Annotation": {
+                    "Properties": {
+                        "group": "user",
+                        "jwt": "Auth",
+                        "prefix": "/api/v1/users"
+                    }
+                },
+                "Routes": [
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/",
+                        "RequestType": {
+                            "RawName": "GetUsersReq",
+                            "Members": [
+                                {
+                                    "Name": "Page",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"page,optional,default=1\"`",
+                                    "Comment": "// 页码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Size",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"size,optional,default=10\"`",
+                                    "Comment": "// 每页大小",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Keyword",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"keyword,optional\"`",
+                                    "Comment": "// 搜索关键词",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"status,optional\"`",
+                                    "Comment": "// 用户状态筛选",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户列表请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "GetUsersResp",
+                            "Members": [
+                                {
+                                    "Name": "Total",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"total\"`",
+                                    "Comment": "// 总数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "List",
+                                    "Type": {
+                                        "RawName": "[]User",
+                                        "Value": {
+                                            "RawName": "User",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"list\"`",
+                                    "Comment": "// 用户列表",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户列表响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getUsers",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "分页获取用户列表，支持搜索和筛选",
+                                "summary": "获取用户列表"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/:id",
+                        "RequestType": {
+                            "RawName": "GetUserReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 获取用户信息请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "User",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Username",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"username\"`",
+                                    "Comment": "// 用户名",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Email",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"email\"`",
+                                    "Comment": "// 邮箱",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Phone",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"phone,optional\"`",
+                                    "Comment": "// 手机号（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Avatar",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"avatar,optional\"`",
+                                    "Comment": "// 头像URL（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "UserStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "UserStatusActive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "UserStatusInactive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 未激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "UserStatusBlocked",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 已封禁",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 用户状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 用户状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getUser",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "根据用户ID获取用户详细信息",
+                                "summary": "获取用户信息"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "put",
+                        "Path": "/:id",
+                        "RequestType": {
+                            "RawName": "UpdateUserReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Username",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"username,optional\"`",
+                                    "Comment": "// 用户名（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Email",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"email,optional\"`",
+                                    "Comment": "// 邮箱（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Phone",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"phone,optional\"`",
+                                    "Comment": "// 手机号（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Avatar",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"avatar,optional\"`",
+                                    "Comment": "// 头像URL（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 更新用户信息请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "User",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Username",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"username\"`",
+                                    "Comment": "// 用户名",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Email",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"email\"`",
+                                    "Comment": "// 邮箱",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Phone",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"phone,optional\"`",
+                                    "Comment": "// 手机号（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Avatar",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"avatar,optional\"`",
+                                    "Comment": "// 头像URL（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "UserStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "UserStatusActive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "UserStatusInactive",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 未激活",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "UserStatusBlocked",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 已封禁",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 用户状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 用户状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "updateUser",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "更新用户的基本信息",
+                                "summary": "更新用户信息"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "delete",
+                        "Path": "/:id",
+                        "RequestType": {
+                            "RawName": "DeleteUserReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 删除用户请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "CommonResp",
+                            "Members": [
+                                {
+                                    "Name": "Code",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"code\"`",
+                                    "Comment": "// 响应码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Message",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"message\"`",
+                                    "Comment": "// 响应消息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 通用响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "deleteUser",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "删除指定的用户账户",
+                                "summary": "删除用户"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/login",
+                        "RequestType": {
+                            "RawName": "LoginReq",
+                            "Members": [
+                                {
+                                    "Name": "Username",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"username\"`",
+                                    "Comment": "// 用户名或邮箱",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Password",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"password\"`",
+                                    "Comment": "// 密码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户登录请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "LoginResp",
+                            "Members": [
+                                {
+                                    "Name": "User",
+                                    "Type": {
+                                        "RawName": "User",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 用户ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Username",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"username\"`",
+                                                "Comment": "// 用户名",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Email",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"email\"`",
+                                                "Comment": "// 邮箱",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Phone",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"phone,optional\"`",
+                                                "Comment": "// 手机号（可选）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Avatar",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"avatar,optional\"`",
+                                                "Comment": "// 头像URL（可选）",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Status",
+                                                "Type": {
+                                                    "RawName": "UserStatus",
+                                                    "Members": null,
+                                                    "Docs": null
+                                                },
+                                                "Tag": "`json:\"status\"`",
+                                                "Comment": "// 用户状态",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "CreatedAt",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"created_at\"`",
+                                                "Comment": "// 创建时间",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "UpdatedAt",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"updated_at\"`",
+                                                "Comment": "// 更新时间",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 用户信息"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"user\"`",
+                                    "Comment": "// 用户信息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Token",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"token\"`",
+                                    "Comment": "// JWT令牌",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ExpiresAt",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"expires_at\"`",
+                                    "Comment": "// 过期时间戳",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户登录响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "login",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "用户登录获取JWT令牌",
+                                "summary": "用户登录"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/register",
+                        "RequestType": {
+                            "RawName": "RegisterReq",
+                            "Members": [
+                                {
+                                    "Name": "Username",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"username\"`",
+                                    "Comment": "// 用户名",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Email",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"email\"`",
+                                    "Comment": "// 邮箱",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Password",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"password\"`",
+                                    "Comment": "// 密码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Phone",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"phone,optional\"`",
+                                    "Comment": "// 手机号（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户注册请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "RegisterResp",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Token",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"token\"`",
+                                    "Comment": "// JWT令牌",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户注册响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "register",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "创建新用户账户",
+                                "summary": "用户注册"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    }
+                ]
+            }
+        ]
+    }
+}
