@@ -1,0 +1,49 @@
+syntax = "v1"
+
+info(
+    title: "简单测试接口"
+    desc: "用于测试解析器的简单API"
+    author: "测试团队"
+    email: "test@example.com"
+    version: "v1.0"
+)
+
+type (
+    // 用户基本信息
+    SimpleUser {
+        Id int64 `json:"id"`                     // 用户ID
+        Name string `json:"name"`                // 用户名
+        Email string `json:"email,optional"`    // 邮箱（可选）
+    }
+
+    // 获取用户请求
+    GetUserReq {
+        Id int64 `json:"id" path:"id"`          // 用户ID
+    }
+
+    // 创建用户请求
+    CreateUserReq {
+        Name string `json:"name"`               // 用户名
+        Email string `json:"email,optional"`   // 邮箱
+    }
+)
+
+@server(
+    group: simple
+    prefix: /api/v1/simple
+)
+service SimpleService {
+    @doc(
+        summary: "获取用户信息"
+        description: "根据ID获取用户信息"
+    )
+    @handler getUser
+    get /user/:id (GetUserReq) returns (SimpleUser)
+
+    @doc(
+        summary: "创建用户"
+        description: "创建新用户"
+    )
+    @handler createUser
+    post /user (CreateUserReq) returns (SimpleUser)
+}

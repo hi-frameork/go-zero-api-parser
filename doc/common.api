@@ -1,0 +1,167 @@
+syntax = "v1"
+
+info(
+    title: "通用接口定义"
+    desc: "公共的数据结构和接口定义"
+    author: "基础架构团队"
+    email: "infra@example.com"
+    version: "v1.0"
+)
+
+type (
+    // 通用响应结构
+    CommonResp {
+        Code int32 `json:"code"`                    // 响应码，0表示成功
+        Message string `json:"message"`             // 响应消息
+        Data interface{} `json:"data,optional"`     // 响应数据
+        Timestamp int64 `json:"timestamp"`          // 时间戳
+    }
+
+    // 分页请求
+    PageReq {
+        Page int32 `json:"page,optional,default=1"`     // 页码，从1开始
+        Size int32 `json:"size,optional,default=10"`    // 每页大小
+        SortBy string `json:"sort_by,optional"`          // 排序字段
+        SortOrder string `json:"sort_order,optional"`    // 排序方向：asc/desc
+    }
+
+    // 分页响应
+    PageResp {
+        Total int64 `json:"total"`                  // 总记录数
+        Page int32 `json:"page"`                    // 当前页码
+        Size int32 `json:"size"`                    // 每页大小
+        TotalPages int32 `json:"total_pages"`       // 总页数
+        HasNext bool `json:"has_next"`              // 是否有下一页
+        HasPrev bool `json:"has_prev"`              // 是否有上一页
+    }
+
+    // ID请求
+    IdReq {
+        Id int64 `json:"id" path:"id"`              // ID
+    }
+
+    // ID列表请求
+    IdsReq {
+        Ids []int64 `json:"ids"`                    // ID列表
+    }
+
+    // 文件上传响应
+    UploadResp {
+        Url string `json:"url"`                     // 文件访问URL
+        Filename string `json:"filename"`           // 原始文件名
+        Size int64 `json:"size"`                    // 文件大小（字节）
+        MimeType string `json:"mime_type"`          // 文件类型
+        UploadedAt string `json:"uploaded_at"`      // 上传时间
+    }
+
+    // 批量删除请求
+    BatchDeleteReq {
+        Ids []int64 `json:"ids"`                    // 要删除的ID列表
+    }
+
+    // 批量操作响应
+    BatchOperationResp {
+        SuccessCount int32 `json:"success_count"`   // 成功数量
+        FailedCount int32 `json:"failed_count"`     // 失败数量
+        FailedIds []int64 `json:"failed_ids"`       // 失败的ID列表
+        Errors []string `json:"errors,optional"`    // 错误信息列表
+    }
+
+    // 搜索请求
+    SearchReq {
+        Keyword string `json:"keyword"`             // 搜索关键词
+        Fields []string `json:"fields,optional"`    // 搜索字段
+        Filters map[string]interface{} `json:"filters,optional"` // 过滤条件
+        Page int32 `json:"page,optional,default=1"` // 页码
+        Size int32 `json:"size,optional,default=20"` // 每页大小
+    }
+
+    // 状态枚举基础类型
+    BaseStatus {
+        StatusActive int32 `json:"-" val:"1"`       // 激活/启用
+        StatusInactive int32 `json:"-" val:"0"`     // 未激活/禁用
+        StatusDeleted int32 `json:"-" val:"-1"`     // 已删除
+    }
+
+    // 性别枚举
+    Gender {
+        GenderUnknown int32 `json:"-" val:"0"`      // 未知
+        GenderMale int32 `json:"-" val:"1"`         // 男性
+        GenderFemale int32 `json:"-" val:"2"`       // 女性
+    }
+
+    // 审核状态枚举
+    AuditStatus {
+        AuditStatusPending int32 `json:"-" val:"0"`    // 待审核
+        AuditStatusApproved int32 `json:"-" val:"1"`   // 已通过
+        AuditStatusRejected int32 `json:"-" val:"2"`   // 已拒绝
+    }
+
+    // 操作日志
+    OperationLog {
+        Id int64 `json:"id"`                        // 日志ID
+        UserId int64 `json:"user_id"`               // 操作用户ID
+        Username string `json:"username"`           // 用户名
+        Action string `json:"action"`               // 操作动作
+        Resource string `json:"resource"`           // 操作资源
+        ResourceId string `json:"resource_id"`      // 资源ID
+        Details map[string]interface{} `json:"details,optional"` // 操作详情
+        IP string `json:"ip"`                       // 操作IP
+        UserAgent string `json:"user_agent"`        // 用户代理
+        CreatedAt string `json:"created_at"`        // 创建时间
+    }
+
+    // 配置项
+    ConfigItem {
+        Key string `json:"key"`                     // 配置键
+        Value string `json:"value"`                 // 配置值
+        Description string `json:"description"`     // 配置描述
+        Type string `json:"type"`                   // 配置类型：string/int/bool/json
+        Category string `json:"category"`           // 配置分类
+        IsPublic bool `json:"is_public"`            // 是否公开
+        UpdatedAt string `json:"updated_at"`        // 更新时间
+    }
+
+    // 健康检查响应
+    HealthResp {
+        Status string `json:"status"`               // 服务状态：healthy/unhealthy
+        Version string `json:"version"`             // 服务版本
+        Uptime int64 `json:"uptime"`                // 运行时间（秒）
+        Timestamp int64 `json:"timestamp"`          // 当前时间戳
+        Dependencies map[string]string `json:"dependencies,optional"` // 依赖服务状态
+    }
+)
+
+@server(
+    group: common
+    prefix: /api/v1/common
+)
+service CommonService {
+    @doc(
+        summary: "文件上传"
+        description: "上传文件到服务器"
+    )
+    @handler upload
+    post /upload () returns (UploadResp)
+
+    @doc(
+        summary: "健康检查"
+        description: "检查服务健康状态"
+    )
+    @handler health
+    get /health () returns (HealthResp)
+
+    @doc(
+        summary: "获取配置列表"
+        description: "获取公开的配置项列表"
+    )
+    @handler getConfigs
+    get /configs () returns ([]ConfigItem)
+
+    @doc(
+        summary: "通用搜索"
+        description: "提供通用的搜索功能"
+    )
+    @handler search
+    post /search (SearchReq) returns (CommonResp)
+}

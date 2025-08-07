@@ -6,15 +6,12 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Your Name",
-            "email": "your.email@example.com"
+            "name": "anoxia",
+            "email": "anoxia@engineer.com"
         }
     ],
     "require": {
-        "php": "^7.4|^8.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.0"
+        "php": "^8.0"
     },
     "autoload": {
         "psr-4": {
@@ -28,12 +25,16 @@
     },
     "scripts": {
         "test": "phpunit",
-        "build": "go build -o api-parser main.go"
+        "build": "go build -o api-parser-compiled main.go"
     },
     "config": {
         "optimize-autoloader": true,
         "sort-packages": true
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.85",
+        "phpunit/phpunit": "^9.6"
+    }
 }

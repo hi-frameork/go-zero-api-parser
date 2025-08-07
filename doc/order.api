@@ -1,0 +1,214 @@
+syntax = "v1"
+
+info(
+    title: "订单服务接口"
+    desc: "订单管理和支付相关API"
+    author: "订单团队"
+    email: "order@example.com"
+    version: "v1.5"
+)
+
+// import "user.api"
+// import "product.api"
+
+type (
+    // 订单状态枚举
+    OrderStatus {
+        OrderStatusPending int32 `json:"-" val:"1"`     // 待支付
+        OrderStatusPaid int32 `json:"-" val:"2"`        // 已支付
+        OrderStatusShipped int32 `json:"-" val:"3"`     // 已发货
+        OrderStatusDelivered int32 `json:"-" val:"4"`   // 已送达
+        OrderStatusCancelled int32 `json:"-" val:"5"`   // 已取消
+        OrderStatusRefunded int32 `json:"-" val:"6"`    // 已退款
+    }
+
+    // 支付方式枚举
+    PaymentMethod {
+        PaymentMethodAlipay int32 `json:"-" val:"1"`    // 支付宝
+        PaymentMethodWechat int32 `json:"-" val:"2"`    // 微信支付
+        PaymentMethodCard int32 `json:"-" val:"3"`      // 银行卡
+        PaymentMethodCash int32 `json:"-" val:"4"`      // 货到付款
+    }
+
+    // 订单商品项
+    OrderItem {
+        Id int64 `json:"id"`                            // 订单项ID
+        ProductId int64 `json:"product_id"`             // 商品ID
+        ProductName string `json:"product_name"`        // 商品名称
+        ProductImage string `json:"product_image"`      // 商品主图
+        Price float64 `json:"price"`                    // 单价
+        Quantity int32 `json:"quantity"`                // 数量
+        TotalPrice float64 `json:"total_price"`         // 小计
+        Specifications map[string]string `json:"specifications,optional"` // 商品规格
+    }
+
+    // 收货地址
+    ShippingAddress {
+        Id int64 `json:"id"`                            // 地址ID
+        ReceiverName string `json:"receiver_name"`      // 收货人姓名
+        Phone string `json:"phone"`                     // 收货人电话
+        Province string `json:"province"`               // 省份
+        City string `json:"city"`                       // 城市
+        District string `json:"district"`               // 区域
+        Address string `json:"address"`                 // 详细地址
+        PostalCode string `json:"postal_code,optional"` // 邮政编码
+        IsDefault bool `json:"is_default"`              // 是否默认地址
+    }
+
+    // 订单信息
+    Order {
+        Id int64 `json:"id"`                            // 订单ID
+        OrderNo string `json:"order_no"`                // 订单号
+        UserId int64 `json:"user_id"`                   // 用户ID
+        UserName string `json:"user_name,optional"`     // 用户名称
+        Items []OrderItem `json:"items"`                // 订单商品
+        TotalAmount float64 `json:"total_amount"`       // 订单总金额
+        ShippingFee float64 `json:"shipping_fee"`       // 运费
+        DiscountAmount float64 `json:"discount_amount"` // 优惠金额
+        PayableAmount float64 `json:"payable_amount"`   // 应付金额
+        Status OrderStatus `json:"status"`              // 订单状态
+        PaymentMethod PaymentMethod `json:"payment_method,optional"` // 支付方式
+        ShippingAddress ShippingAddress `json:"shipping_address"` // 收货地址
+        Remark string `json:"remark,optional"`          // 订单备注
+        TrackingNo string `json:"tracking_no,optional"` // 物流单号
+        PaidAt string `json:"paid_at,optional"`         // 支付时间
+        ShippedAt string `json:"shipped_at,optional"`   // 发货时间
+        DeliveredAt string `json:"delivered_at,optional"` // 送达时间
+        CreatedAt string `json:"created_at"`            // 创建时间
+        UpdatedAt string `json:"updated_at"`            // 更新时间
+    }
+
+    // 创建订单请求
+    CreateOrderReq {
+        Items []CreateOrderItem `json:"items"`          // 订单商品
+        ShippingAddressId int64 `json:"shipping_address_id"` // 收货地址ID
+        PaymentMethod int32 `json:"payment_method"`     // 支付方式
+        Remark string `json:"remark,optional"`          // 订单备注
+        CouponCode string `json:"coupon_code,optional"` // 优惠券代码
+    }
+
+    // 创建订单商品项
+    CreateOrderItem {
+        ProductId int64 `json:"product_id"`             // 商品ID
+        Quantity int32 `json:"quantity"`                // 数量
+        Specifications map[string]string `json:"specifications,optional"` // 商品规格
+    }
+
+    // 订单列表请求
+    GetOrdersReq {
+        Page int32 `json:"page,optional,default=1"`     // 页码
+        Size int32 `json:"size,optional,default=10"`    // 每页大小
+        Status int32 `json:"status,optional"`           // 状态筛选
+        UserId int64 `json:"user_id,optional"`          // 用户ID筛选
+        OrderNo string `json:"order_no,optional"`       // 订单号搜索
+        StartDate string `json:"start_date,optional"`   // 开始日期
+        EndDate string `json:"end_date,optional"`       // 结束日期
+    }
+
+    // 订单列表响应
+    GetOrdersResp {
+        Total int64 `json:"total"`                      // 总数
+        List []Order `json:"list"`                      // 订单列表
+    }
+
+    // 获取订单详情请求
+    GetOrderReq {
+        Id int64 `json:"id" path:"id"`                  // 订单ID
+    }
+
+    // 更新订单状态请求
+    UpdateOrderStatusReq {
+        Id int64 `json:"id" path:"id"`                  // 订单ID
+        Status int32 `json:"status"`                    // 新状态
+        TrackingNo string `json:"tracking_no,optional"` // 物流单号
+        Remark string `json:"remark,optional"`          // 备注
+    }
+
+    // 支付订单请求
+    PayOrderReq {
+        Id int64 `json:"id" path:"id"`                  // 订单ID
+        PaymentMethod int32 `json:"payment_method"`     // 支付方式
+        PaymentData map[string]string `json:"payment_data,optional"` // 支付相关数据
+    }
+
+    // 支付响应
+    PayOrderResp {
+        PaymentId string `json:"payment_id"`            // 支付ID
+        PaymentUrl string `json:"payment_url,optional"` // 支付链接
+        QrCode string `json:"qr_code,optional"`         // 支付二维码
+        PaymentData map[string]string `json:"payment_data,optional"` // 支付相关数据
+    }
+
+    // 取消订单请求
+    CancelOrderReq {
+        Id int64 `json:"id" path:"id"`                  // 订单ID
+        Reason string `json:"reason"`                   // 取消原因
+    }
+
+    // 订单统计信息
+    OrderStats {
+        TotalOrders int64 `json:"total_orders"`         // 订单总数
+        TotalAmount float64 `json:"total_amount"`       // 订单总金额
+        PendingOrders int64 `json:"pending_orders"`     // 待支付订单数
+        PaidOrders int64 `json:"paid_orders"`           // 已支付订单数
+        ShippedOrders int64 `json:"shipped_orders"`     // 已发货订单数
+        CompletedOrders int64 `json:"completed_orders"` // 已完成订单数
+        CancelledOrders int64 `json:"cancelled_orders"` // 已取消订单数
+    }
+)
+
+@server(
+    group: order
+    prefix: /api/v1/orders
+    jwt: Auth
+)
+service OrderService {
+    @doc(
+        summary: "创建订单"
+        description: "创建新的订单"
+    )
+    @handler createOrder
+    post / (CreateOrderReq) returns (Order)
+
+    @doc(
+        summary: "获取订单列表"
+        description: "分页获取订单列表，支持多种筛选"
+    )
+    @handler getOrders
+    get / (GetOrdersReq) returns (GetOrdersResp)
+
+    @doc(
+        summary: "获取订单详情"
+        description: "根据订单ID获取订单详细信息"
+    )
+    @handler getOrder
+    get /:id (GetOrderReq) returns (Order)
+
+    @doc(
+        summary: "更新订单状态"
+        description: "更新订单的状态信息"
+    )
+    @handler updateOrderStatus
+    put /:id/status (UpdateOrderStatusReq) returns (Order)
+
+    @doc(
+        summary: "支付订单"
+        description: "发起订单支付流程"
+    )
+    @handler payOrder
+    post /:id/pay (PayOrderReq) returns (PayOrderResp)
+
+    @doc(
+        summary: "取消订单"
+        description: "取消指定的订单"
+    )
+    @handler cancelOrder
+            post /:id/cancel (CancelOrderReq) returns (Order)
+
+    @doc(
+        summary: "获取订单统计"
+        description: "获取订单相关的统计信息"
+    )
+    @handler getOrderStats
+    get /stats () returns (OrderStats)
+}

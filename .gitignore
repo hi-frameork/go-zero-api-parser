@@ -1,2 +1,7 @@
+.*
 __debug*
-api-parser
+api-parser-compiled
+vendor
+
+!.php-cs-fixer.dist.php
+!.gitignore

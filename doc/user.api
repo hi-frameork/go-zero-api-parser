@@ -1,0 +1,145 @@
+syntax = "v1"
+
+info(
+    title: "用户服务接口"
+    desc: "用户管理相关的API接口"
+    author: "开发团队"
+    email: "dev@example.com"
+    version: "v1.0"
+)
+
+type (
+    // 用户信息
+    User {
+        Id int64 `json:"id"`                       // 用户ID
+        Username string `json:"username"`          // 用户名
+        Email string `json:"email"`                // 邮箱
+        Phone string `json:"phone,optional"`       // 手机号（可选）
+        Avatar string `json:"avatar,optional"`     // 头像URL（可选）
+        Status UserStatus `json:"status"`          // 用户状态
+        CreatedAt string `json:"created_at"`       // 创建时间
+        UpdatedAt string `json:"updated_at"`       // 更新时间
+    }
+
+    // 用户状态枚举
+    UserStatus {
+        UserStatusActive int32 `json:"-" val:"1"`    // 激活
+        UserStatusInactive int32 `json:"-" val:"2"`  // 未激活
+        UserStatusBlocked int32 `json:"-" val:"3"`   // 已封禁
+    }
+
+    // 用户注册请求
+    RegisterReq {
+        Username string `json:"username"`           // 用户名
+        Email string `json:"email"`                 // 邮箱
+        Password string `json:"password"`           // 密码
+        Phone string `json:"phone,optional"`        // 手机号（可选）
+    }
+
+    // 用户注册响应
+    RegisterResp {
+        Id int64 `json:"id"`                        // 用户ID
+        Token string `json:"token"`                 // JWT令牌
+    }
+
+    // 用户登录请求
+    LoginReq {
+        Username string `json:"username"`           // 用户名或邮箱
+        Password string `json:"password"`           // 密码
+    }
+
+    // 用户登录响应
+    LoginResp {
+        User User `json:"user"`                     // 用户信息
+        Token string `json:"token"`                 // JWT令牌
+        ExpiresAt int64 `json:"expires_at"`         // 过期时间戳
+    }
+
+    // 获取用户信息请求
+    GetUserReq {
+        Id int64 `json:"id" path:"id"`              // 用户ID
+    }
+
+    // 更新用户信息请求
+    UpdateUserReq {
+        Id int64 `json:"id" path:"id"`              // 用户ID
+        Username string `json:"username,optional"`  // 用户名（可选）
+        Email string `json:"email,optional"`        // 邮箱（可选）
+        Phone string `json:"phone,optional"`        // 手机号（可选）
+        Avatar string `json:"avatar,optional"`      // 头像URL（可选）
+    }
+
+    // 用户列表请求
+    GetUsersReq {
+        Page int32 `json:"page,optional,default=1"` // 页码
+        Size int32 `json:"size,optional,default=10"` // 每页大小
+        Keyword string `json:"keyword,optional"`     // 搜索关键词
+        Status int32 `json:"status,optional"`        // 用户状态筛选
+    }
+
+    // 用户列表响应
+    GetUsersResp {
+        Total int64 `json:"total"`                  // 总数
+        List []User `json:"list"`                   // 用户列表
+    }
+
+    // 删除用户请求
+    DeleteUserReq {
+        Id int64 `json:"id" path:"id"`              // 用户ID
+    }
+
+    // 通用响应
+    CommonResp {
+        Code int32 `json:"code"`                    // 响应码
+        Message string `json:"message"`             // 响应消息
+    }
+)
+
+@server(
+    group: user
+    prefix: /api/v1/users
+    jwt: Auth
+)
+service UserService {
+    @doc(
+        summary: "用户注册"
+        description: "创建新用户账户"
+    )
+    @handler register
+    post /register (RegisterReq) returns (RegisterResp)
+
+    @doc(
+        summary: "用户登录"
+        description: "用户登录获取JWT令牌"
+    )
+    @handler login
+    post /login (LoginReq) returns (LoginResp)
+
+    @doc(
+        summary: "获取用户信息"
+        description: "根据用户ID获取用户详细信息"
+    )
+    @handler getUser
+    get /:id (GetUserReq) returns (User)
+
+    @doc(
+        summary: "更新用户信息"
+        description: "更新用户的基本信息"
+    )
+    @handler updateUser
+    put /:id (UpdateUserReq) returns (User)
+
+    @doc(
+        summary: "删除用户"
+        description: "删除指定的用户账户"
+    )
+    @handler deleteUser
+    delete /:id (DeleteUserReq) returns (CommonResp)
+
+    @doc(
+        summary: "获取用户列表"
+        description: "分页获取用户列表，支持搜索和筛选"
+    )
+    @handler getUsers
+    get / (GetUsersReq) returns (GetUsersResp)
+}
