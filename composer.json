@@ -1,5 +1,5 @@
 {
-    "name": "go-zero-api-parser/go-zero-api-parser",
+    "name": "hi-framework/go-zero-api-parser",
     "description": "go-zero API 文件解析器 - 通过 PHP 调用 Go 可执行文件解析 .api 文件",
     "type": "library",
     "keywords": ["go-zero", "api", "parser", "php", "json"],
