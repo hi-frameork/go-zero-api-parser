@@ -1,0 +1,1203 @@
+{
+    "Info": {
+        "Title": "通用接口定义",
+        "Desc": "公共的数据结构和接口定义",
+        "Version": "v1.0",
+        "Author": "基础架构团队",
+        "Email": "infra@example.com",
+        "Properties": {
+            "author": "基础架构团队",
+            "desc": "公共的数据结构和接口定义",
+            "email": "infra@example.com",
+            "title": "通用接口定义",
+            "version": "v1.0"
+        }
+    },
+    "Syntax": {
+        "Version": "",
+        "Doc": null,
+        "Comment": null
+    },
+    "Imports": null,
+    "Types": [
+        {
+            "RawName": "AuditStatus",
+            "Members": [
+                {
+                    "Name": "AuditStatusPending",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"0\"`",
+                    "Comment": "// 待审核",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "AuditStatusApproved",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"1\"`",
+                    "Comment": "// 已通过",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "AuditStatusRejected",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"2\"`",
+                    "Comment": "// 已拒绝",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 审核状态枚举"
+            ]
+        },
+        {
+            "RawName": "BaseStatus",
+            "Members": [
+                {
+                    "Name": "StatusActive",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"1\"`",
+                    "Comment": "// 激活/启用",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "StatusInactive",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"0\"`",
+                    "Comment": "// 未激活/禁用",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "StatusDeleted",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"-1\"`",
+                    "Comment": "// 已删除",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 状态枚举基础类型"
+            ]
+        },
+        {
+            "RawName": "BatchDeleteReq",
+            "Members": [
+                {
+                    "Name": "Ids",
+                    "Type": {
+                        "RawName": "[]int64",
+                        "Value": {
+                            "RawName": "int64"
+                        }
+                    },
+                    "Tag": "`json:\"ids\"`",
+                    "Comment": "// 要删除的ID列表",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 批量删除请求"
+            ]
+        },
+        {
+            "RawName": "BatchOperationResp",
+            "Members": [
+                {
+                    "Name": "SuccessCount",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"success_count\"`",
+                    "Comment": "// 成功数量",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "FailedCount",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"failed_count\"`",
+                    "Comment": "// 失败数量",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "FailedIds",
+                    "Type": {
+                        "RawName": "[]int64",
+                        "Value": {
+                            "RawName": "int64"
+                        }
+                    },
+                    "Tag": "`json:\"failed_ids\"`",
+                    "Comment": "// 失败的ID列表",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Errors",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"errors,optional\"`",
+                    "Comment": "// 错误信息列表",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 批量操作响应"
+            ]
+        },
+        {
+            "RawName": "CommonResp",
+            "Members": [
+                {
+                    "Name": "Code",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"code\"`",
+                    "Comment": "// 响应码，0表示成功",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Message",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"message\"`",
+                    "Comment": "// 响应消息",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Data",
+                    "Type": {
+                        "RawName": "interface{}"
+                    },
+                    "Tag": "`json:\"data,optional\"`",
+                    "Comment": "// 响应数据",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Timestamp",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"timestamp\"`",
+                    "Comment": "// 时间戳",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 通用响应结构"
+            ]
+        },
+        {
+            "RawName": "ConfigItem",
+            "Members": [
+                {
+                    "Name": "Key",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"key\"`",
+                    "Comment": "// 配置键",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Value",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"value\"`",
+                    "Comment": "// 配置值",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Description",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"description\"`",
+                    "Comment": "// 配置描述",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Type",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"type\"`",
+                    "Comment": "// 配置类型：string/int/bool/json",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Category",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"category\"`",
+                    "Comment": "// 配置分类",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "IsPublic",
+                    "Type": {
+                        "RawName": "bool"
+                    },
+                    "Tag": "`json:\"is_public\"`",
+                    "Comment": "// 是否公开",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UpdatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"updated_at\"`",
+                    "Comment": "// 更新时间",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 配置项"
+            ]
+        },
+        {
+            "RawName": "Gender",
+            "Members": [
+                {
+                    "Name": "GenderUnknown",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"0\"`",
+                    "Comment": "// 未知",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "GenderMale",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"1\"`",
+                    "Comment": "// 男性",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "GenderFemale",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"2\"`",
+                    "Comment": "// 女性",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 性别枚举"
+            ]
+        },
+        {
+            "RawName": "HealthResp",
+            "Members": [
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"status\"`",
+                    "Comment": "// 服务状态：healthy/unhealthy",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Version",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"version\"`",
+                    "Comment": "// 服务版本",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Uptime",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"uptime\"`",
+                    "Comment": "// 运行时间（秒）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Timestamp",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"timestamp\"`",
+                    "Comment": "// 当前时间戳",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Dependencies",
+                    "Type": {
+                        "RawName": "map[string]string",
+                        "Key": "string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"dependencies,optional\"`",
+                    "Comment": "// 依赖服务状态",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 健康检查响应"
+            ]
+        },
+        {
+            "RawName": "IdReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// ID",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// ID请求"
+            ]
+        },
+        {
+            "RawName": "IdsReq",
+            "Members": [
+                {
+                    "Name": "Ids",
+                    "Type": {
+                        "RawName": "[]int64",
+                        "Value": {
+                            "RawName": "int64"
+                        }
+                    },
+                    "Tag": "`json:\"ids\"`",
+                    "Comment": "// ID列表",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// ID列表请求"
+            ]
+        },
+        {
+            "RawName": "OperationLog",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 日志ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UserId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"user_id\"`",
+                    "Comment": "// 操作用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Username",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"username\"`",
+                    "Comment": "// 用户名",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Action",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"action\"`",
+                    "Comment": "// 操作动作",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Resource",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"resource\"`",
+                    "Comment": "// 操作资源",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ResourceId",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"resource_id\"`",
+                    "Comment": "// 资源ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Details",
+                    "Type": {
+                        "RawName": "map[string]interface{}",
+                        "Key": "string",
+                        "Value": {
+                            "RawName": "interface{}"
+                        }
+                    },
+                    "Tag": "`json:\"details,optional\"`",
+                    "Comment": "// 操作详情",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "IP",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"ip\"`",
+                    "Comment": "// 操作IP",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UserAgent",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"user_agent\"`",
+                    "Comment": "// 用户代理",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CreatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"created_at\"`",
+                    "Comment": "// 创建时间",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 操作日志"
+            ]
+        },
+        {
+            "RawName": "PageReq",
+            "Members": [
+                {
+                    "Name": "Page",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"page,optional,default=1\"`",
+                    "Comment": "// 页码，从1开始",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Size",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"size,optional,default=10\"`",
+                    "Comment": "// 每页大小",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "SortBy",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"sort_by,optional\"`",
+                    "Comment": "// 排序字段",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "SortOrder",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"sort_order,optional\"`",
+                    "Comment": "// 排序方向：asc/desc",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 分页请求"
+            ]
+        },
+        {
+            "RawName": "PageResp",
+            "Members": [
+                {
+                    "Name": "Total",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"total\"`",
+                    "Comment": "// 总记录数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Page",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"page\"`",
+                    "Comment": "// 当前页码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Size",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"size\"`",
+                    "Comment": "// 每页大小",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "TotalPages",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"total_pages\"`",
+                    "Comment": "// 总页数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "HasNext",
+                    "Type": {
+                        "RawName": "bool"
+                    },
+                    "Tag": "`json:\"has_next\"`",
+                    "Comment": "// 是否有下一页",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "HasPrev",
+                    "Type": {
+                        "RawName": "bool"
+                    },
+                    "Tag": "`json:\"has_prev\"`",
+                    "Comment": "// 是否有上一页",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 分页响应"
+            ]
+        },
+        {
+            "RawName": "SearchReq",
+            "Members": [
+                {
+                    "Name": "Keyword",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"keyword\"`",
+                    "Comment": "// 搜索关键词",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Fields",
+                    "Type": {
+                        "RawName": "[]string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"fields,optional\"`",
+                    "Comment": "// 搜索字段",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Filters",
+                    "Type": {
+                        "RawName": "map[string]interface{}",
+                        "Key": "string",
+                        "Value": {
+                            "RawName": "interface{}"
+                        }
+                    },
+                    "Tag": "`json:\"filters,optional\"`",
+                    "Comment": "// 过滤条件",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Page",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"page,optional,default=1\"`",
+                    "Comment": "// 页码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Size",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"size,optional,default=20\"`",
+                    "Comment": "// 每页大小",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 搜索请求"
+            ]
+        },
+        {
+            "RawName": "UploadResp",
+            "Members": [
+                {
+                    "Name": "Url",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"url\"`",
+                    "Comment": "// 文件访问URL",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Filename",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"filename\"`",
+                    "Comment": "// 原始文件名",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Size",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"size\"`",
+                    "Comment": "// 文件大小（字节）",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "MimeType",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"mime_type\"`",
+                    "Comment": "// 文件类型",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UploadedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"uploaded_at\"`",
+                    "Comment": "// 上传时间",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 文件上传响应"
+            ]
+        }
+    ],
+    "Service": {
+        "Name": "CommonService",
+        "Groups": [
+            {
+                "Annotation": {
+                    "Properties": {
+                        "group": "common",
+                        "prefix": "/api/v1/common"
+                    }
+                },
+                "Routes": [
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/configs",
+                        "RequestType": null,
+                        "ResponseType": {
+                            "RawName": "[]ConfigItem",
+                            "Value": {
+                                "RawName": "ConfigItem",
+                                "Members": [
+                                    {
+                                        "Name": "Key",
+                                        "Type": {
+                                            "RawName": "string"
+                                        },
+                                        "Tag": "`json:\"key\"`",
+                                        "Comment": "// 配置键",
+                                        "Docs": [],
+                                        "IsInline": false
+                                    },
+                                    {
+                                        "Name": "Value",
+                                        "Type": {
+                                            "RawName": "string"
+                                        },
+                                        "Tag": "`json:\"value\"`",
+                                        "Comment": "// 配置值",
+                                        "Docs": [],
+                                        "IsInline": false
+                                    },
+                                    {
+                                        "Name": "Description",
+                                        "Type": {
+                                            "RawName": "string"
+                                        },
+                                        "Tag": "`json:\"description\"`",
+                                        "Comment": "// 配置描述",
+                                        "Docs": [],
+                                        "IsInline": false
+                                    },
+                                    {
+                                        "Name": "Type",
+                                        "Type": {
+                                            "RawName": "string"
+                                        },
+                                        "Tag": "`json:\"type\"`",
+                                        "Comment": "// 配置类型：string/int/bool/json",
+                                        "Docs": [],
+                                        "IsInline": false
+                                    },
+                                    {
+                                        "Name": "Category",
+                                        "Type": {
+                                            "RawName": "string"
+                                        },
+                                        "Tag": "`json:\"category\"`",
+                                        "Comment": "// 配置分类",
+                                        "Docs": [],
+                                        "IsInline": false
+                                    },
+                                    {
+                                        "Name": "IsPublic",
+                                        "Type": {
+                                            "RawName": "bool"
+                                        },
+                                        "Tag": "`json:\"is_public\"`",
+                                        "Comment": "// 是否公开",
+                                        "Docs": [],
+                                        "IsInline": false
+                                    },
+                                    {
+                                        "Name": "UpdatedAt",
+                                        "Type": {
+                                            "RawName": "string"
+                                        },
+                                        "Tag": "`json:\"updated_at\"`",
+                                        "Comment": "// 更新时间",
+                                        "Docs": [],
+                                        "IsInline": false
+                                    }
+                                ],
+                                "Docs": [
+                                    "// 配置项"
+                                ]
+                            }
+                        },
+                        "Docs": null,
+                        "Handler": "getConfigs",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "获取公开的配置项列表",
+                                "summary": "获取配置列表"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/health",
+                        "RequestType": null,
+                        "ResponseType": {
+                            "RawName": "HealthResp",
+                            "Members": [
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 服务状态：healthy/unhealthy",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Version",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"version\"`",
+                                    "Comment": "// 服务版本",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Uptime",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"uptime\"`",
+                                    "Comment": "// 运行时间（秒）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Timestamp",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"timestamp\"`",
+                                    "Comment": "// 当前时间戳",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Dependencies",
+                                    "Type": {
+                                        "RawName": "map[string]string",
+                                        "Key": "string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"dependencies,optional\"`",
+                                    "Comment": "// 依赖服务状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 健康检查响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "health",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "检查服务健康状态",
+                                "summary": "健康检查"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/search",
+                        "RequestType": {
+                            "RawName": "SearchReq",
+                            "Members": [
+                                {
+                                    "Name": "Keyword",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"keyword\"`",
+                                    "Comment": "// 搜索关键词",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Fields",
+                                    "Type": {
+                                        "RawName": "[]string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"fields,optional\"`",
+                                    "Comment": "// 搜索字段",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Filters",
+                                    "Type": {
+                                        "RawName": "map[string]interface{}",
+                                        "Key": "string",
+                                        "Value": {
+                                            "RawName": "interface{}"
+                                        }
+                                    },
+                                    "Tag": "`json:\"filters,optional\"`",
+                                    "Comment": "// 过滤条件",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Page",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"page,optional,default=1\"`",
+                                    "Comment": "// 页码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Size",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"size,optional,default=20\"`",
+                                    "Comment": "// 每页大小",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 搜索请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "CommonResp",
+                            "Members": [
+                                {
+                                    "Name": "Code",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"code\"`",
+                                    "Comment": "// 响应码，0表示成功",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Message",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"message\"`",
+                                    "Comment": "// 响应消息",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Data",
+                                    "Type": {
+                                        "RawName": "interface{}"
+                                    },
+                                    "Tag": "`json:\"data,optional\"`",
+                                    "Comment": "// 响应数据",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Timestamp",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"timestamp\"`",
+                                    "Comment": "// 时间戳",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 通用响应结构"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "search",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "提供通用的搜索功能",
+                                "summary": "通用搜索"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/upload",
+                        "RequestType": null,
+                        "ResponseType": {
+                            "RawName": "UploadResp",
+                            "Members": [
+                                {
+                                    "Name": "Url",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"url\"`",
+                                    "Comment": "// 文件访问URL",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Filename",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"filename\"`",
+                                    "Comment": "// 原始文件名",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Size",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"size\"`",
+                                    "Comment": "// 文件大小（字节）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "MimeType",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"mime_type\"`",
+                                    "Comment": "// 文件类型",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UploadedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"uploaded_at\"`",
+                                    "Comment": "// 上传时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 文件上传响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "upload",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "上传文件到服务器",
+                                "summary": "文件上传"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    }
+                ]
+            }
+        ]
+    }
+}

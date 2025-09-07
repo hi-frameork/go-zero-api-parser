@@ -1,0 +1,3449 @@
+{
+    "Info": {
+        "Title": "订单服务接口",
+        "Desc": "订单管理和支付相关API",
+        "Version": "v1.5",
+        "Author": "订单团队",
+        "Email": "order@example.com",
+        "Properties": {
+            "author": "订单团队",
+            "desc": "订单管理和支付相关API",
+            "email": "order@example.com",
+            "title": "订单服务接口",
+            "version": "v1.5"
+        }
+    },
+    "Syntax": {
+        "Version": "",
+        "Doc": null,
+        "Comment": null
+    },
+    "Imports": null,
+    "Types": [
+        {
+            "RawName": "CancelOrderReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 订单ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Reason",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"reason\"`",
+                    "Comment": "// 取消原因",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 取消订单请求"
+            ]
+        },
+        {
+            "RawName": "CreateOrderItem",
+            "Members": [
+                {
+                    "Name": "ProductId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"product_id\"`",
+                    "Comment": "// 商品ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Quantity",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"quantity\"`",
+                    "Comment": "// 数量",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Specifications",
+                    "Type": {
+                        "RawName": "map[string]string",
+                        "Key": "string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"specifications,optional\"`",
+                    "Comment": "// 商品规格",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 创建订单商品项"
+            ]
+        },
+        {
+            "RawName": "CreateOrderReq",
+            "Members": [
+                {
+                    "Name": "Items",
+                    "Type": {
+                        "RawName": "[]CreateOrderItem",
+                        "Value": {
+                            "RawName": "CreateOrderItem",
+                            "Members": null,
+                            "Docs": null
+                        }
+                    },
+                    "Tag": "`json:\"items\"`",
+                    "Comment": "// 订单商品",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ShippingAddressId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"shipping_address_id\"`",
+                    "Comment": "// 收货地址ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentMethod",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"payment_method\"`",
+                    "Comment": "// 支付方式",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Remark",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"remark,optional\"`",
+                    "Comment": "// 订单备注",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CouponCode",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"coupon_code,optional\"`",
+                    "Comment": "// 优惠券代码",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 创建订单请求"
+            ]
+        },
+        {
+            "RawName": "GetOrderReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 订单ID",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 获取订单详情请求"
+            ]
+        },
+        {
+            "RawName": "GetOrdersReq",
+            "Members": [
+                {
+                    "Name": "Page",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"page,optional,default=1\"`",
+                    "Comment": "// 页码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Size",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"size,optional,default=10\"`",
+                    "Comment": "// 每页大小",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"status,optional\"`",
+                    "Comment": "// 状态筛选",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UserId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"user_id,optional\"`",
+                    "Comment": "// 用户ID筛选",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OrderNo",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"order_no,optional\"`",
+                    "Comment": "// 订单号搜索",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "StartDate",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"start_date,optional\"`",
+                    "Comment": "// 开始日期",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "EndDate",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"end_date,optional\"`",
+                    "Comment": "// 结束日期",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 订单列表请求"
+            ]
+        },
+        {
+            "RawName": "GetOrdersResp",
+            "Members": [
+                {
+                    "Name": "Total",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"total\"`",
+                    "Comment": "// 总数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "List",
+                    "Type": {
+                        "RawName": "[]Order",
+                        "Value": {
+                            "RawName": "Order",
+                            "Members": null,
+                            "Docs": null
+                        }
+                    },
+                    "Tag": "`json:\"list\"`",
+                    "Comment": "// 订单列表",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 订单列表响应"
+            ]
+        },
+        {
+            "RawName": "Order",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 订单ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OrderNo",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"order_no\"`",
+                    "Comment": "// 订单号",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UserId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"user_id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UserName",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"user_name,optional\"`",
+                    "Comment": "// 用户名称",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Items",
+                    "Type": {
+                        "RawName": "[]OrderItem",
+                        "Value": {
+                            "RawName": "OrderItem",
+                            "Members": null,
+                            "Docs": null
+                        }
+                    },
+                    "Tag": "`json:\"items\"`",
+                    "Comment": "// 订单商品",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "TotalAmount",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"total_amount\"`",
+                    "Comment": "// 订单总金额",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ShippingFee",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"shipping_fee\"`",
+                    "Comment": "// 运费",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "DiscountAmount",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"discount_amount\"`",
+                    "Comment": "// 优惠金额",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PayableAmount",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"payable_amount\"`",
+                    "Comment": "// 应付金额",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "OrderStatus",
+                        "Members": [
+                            {
+                                "Name": "OrderStatusPending",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"1\"`",
+                                "Comment": "// 待支付",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "OrderStatusPaid",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"2\"`",
+                                "Comment": "// 已支付",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "OrderStatusShipped",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"3\"`",
+                                "Comment": "// 已发货",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "OrderStatusDelivered",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"4\"`",
+                                "Comment": "// 已送达",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "OrderStatusCancelled",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"5\"`",
+                                "Comment": "// 已取消",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "OrderStatusRefunded",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"6\"`",
+                                "Comment": "// 已退款",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 订单状态枚举"
+                        ]
+                    },
+                    "Tag": "`json:\"status\"`",
+                    "Comment": "// 订单状态",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentMethod",
+                    "Type": {
+                        "RawName": "PaymentMethod",
+                        "Members": [
+                            {
+                                "Name": "PaymentMethodAlipay",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"1\"`",
+                                "Comment": "// 支付宝",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "PaymentMethodWechat",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"2\"`",
+                                "Comment": "// 微信支付",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "PaymentMethodCard",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"3\"`",
+                                "Comment": "// 银行卡",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "PaymentMethodCash",
+                                "Type": {
+                                    "RawName": "int32"
+                                },
+                                "Tag": "`json:\"-\" val:\"4\"`",
+                                "Comment": "// 货到付款",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 支付方式枚举"
+                        ]
+                    },
+                    "Tag": "`json:\"payment_method,optional\"`",
+                    "Comment": "// 支付方式",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ShippingAddress",
+                    "Type": {
+                        "RawName": "ShippingAddress",
+                        "Members": [
+                            {
+                                "Name": "Id",
+                                "Type": {
+                                    "RawName": "int64"
+                                },
+                                "Tag": "`json:\"id\"`",
+                                "Comment": "// 地址ID",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "ReceiverName",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"receiver_name\"`",
+                                "Comment": "// 收货人姓名",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Phone",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"phone\"`",
+                                "Comment": "// 收货人电话",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Province",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"province\"`",
+                                "Comment": "// 省份",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "City",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"city\"`",
+                                "Comment": "// 城市",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "District",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"district\"`",
+                                "Comment": "// 区域",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "Address",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"address\"`",
+                                "Comment": "// 详细地址",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "PostalCode",
+                                "Type": {
+                                    "RawName": "string"
+                                },
+                                "Tag": "`json:\"postal_code,optional\"`",
+                                "Comment": "// 邮政编码",
+                                "Docs": [],
+                                "IsInline": false
+                            },
+                            {
+                                "Name": "IsDefault",
+                                "Type": {
+                                    "RawName": "bool"
+                                },
+                                "Tag": "`json:\"is_default\"`",
+                                "Comment": "// 是否默认地址",
+                                "Docs": [],
+                                "IsInline": false
+                            }
+                        ],
+                        "Docs": [
+                            "// 收货地址"
+                        ]
+                    },
+                    "Tag": "`json:\"shipping_address\"`",
+                    "Comment": "// 收货地址",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Remark",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"remark,optional\"`",
+                    "Comment": "// 订单备注",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "TrackingNo",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"tracking_no,optional\"`",
+                    "Comment": "// 物流单号",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaidAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"paid_at,optional\"`",
+                    "Comment": "// 支付时间",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ShippedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"shipped_at,optional\"`",
+                    "Comment": "// 发货时间",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "DeliveredAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"delivered_at,optional\"`",
+                    "Comment": "// 送达时间",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CreatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"created_at\"`",
+                    "Comment": "// 创建时间",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "UpdatedAt",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"updated_at\"`",
+                    "Comment": "// 更新时间",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 订单信息"
+            ]
+        },
+        {
+            "RawName": "OrderItem",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 订单项ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ProductId",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"product_id\"`",
+                    "Comment": "// 商品ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ProductName",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"product_name\"`",
+                    "Comment": "// 商品名称",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ProductImage",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"product_image\"`",
+                    "Comment": "// 商品主图",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Price",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"price\"`",
+                    "Comment": "// 单价",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Quantity",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"quantity\"`",
+                    "Comment": "// 数量",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "TotalPrice",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"total_price\"`",
+                    "Comment": "// 小计",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Specifications",
+                    "Type": {
+                        "RawName": "map[string]string",
+                        "Key": "string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"specifications,optional\"`",
+                    "Comment": "// 商品规格",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 订单商品项"
+            ]
+        },
+        {
+            "RawName": "OrderStats",
+            "Members": [
+                {
+                    "Name": "TotalOrders",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"total_orders\"`",
+                    "Comment": "// 订单总数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "TotalAmount",
+                    "Type": {
+                        "RawName": "float64"
+                    },
+                    "Tag": "`json:\"total_amount\"`",
+                    "Comment": "// 订单总金额",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PendingOrders",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"pending_orders\"`",
+                    "Comment": "// 待支付订单数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaidOrders",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"paid_orders\"`",
+                    "Comment": "// 已支付订单数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ShippedOrders",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"shipped_orders\"`",
+                    "Comment": "// 已发货订单数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CompletedOrders",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"completed_orders\"`",
+                    "Comment": "// 已完成订单数",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "CancelledOrders",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"cancelled_orders\"`",
+                    "Comment": "// 已取消订单数",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 订单统计信息"
+            ]
+        },
+        {
+            "RawName": "OrderStatus",
+            "Members": [
+                {
+                    "Name": "OrderStatusPending",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"1\"`",
+                    "Comment": "// 待支付",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OrderStatusPaid",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"2\"`",
+                    "Comment": "// 已支付",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OrderStatusShipped",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"3\"`",
+                    "Comment": "// 已发货",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OrderStatusDelivered",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"4\"`",
+                    "Comment": "// 已送达",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OrderStatusCancelled",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"5\"`",
+                    "Comment": "// 已取消",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "OrderStatusRefunded",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"6\"`",
+                    "Comment": "// 已退款",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 订单状态枚举"
+            ]
+        },
+        {
+            "RawName": "PayOrderReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 订单ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentMethod",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"payment_method\"`",
+                    "Comment": "// 支付方式",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentData",
+                    "Type": {
+                        "RawName": "map[string]string",
+                        "Key": "string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"payment_data,optional\"`",
+                    "Comment": "// 支付相关数据",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 支付订单请求"
+            ]
+        },
+        {
+            "RawName": "PayOrderResp",
+            "Members": [
+                {
+                    "Name": "PaymentId",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"payment_id\"`",
+                    "Comment": "// 支付ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentUrl",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"payment_url,optional\"`",
+                    "Comment": "// 支付链接",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "QrCode",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"qr_code,optional\"`",
+                    "Comment": "// 支付二维码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentData",
+                    "Type": {
+                        "RawName": "map[string]string",
+                        "Key": "string",
+                        "Value": {
+                            "RawName": "string"
+                        }
+                    },
+                    "Tag": "`json:\"payment_data,optional\"`",
+                    "Comment": "// 支付相关数据",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 支付响应"
+            ]
+        },
+        {
+            "RawName": "PaymentMethod",
+            "Members": [
+                {
+                    "Name": "PaymentMethodAlipay",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"1\"`",
+                    "Comment": "// 支付宝",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentMethodWechat",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"2\"`",
+                    "Comment": "// 微信支付",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentMethodCard",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"3\"`",
+                    "Comment": "// 银行卡",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PaymentMethodCash",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"-\" val:\"4\"`",
+                    "Comment": "// 货到付款",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 支付方式枚举"
+            ]
+        },
+        {
+            "RawName": "ShippingAddress",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 地址ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "ReceiverName",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"receiver_name\"`",
+                    "Comment": "// 收货人姓名",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Phone",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"phone\"`",
+                    "Comment": "// 收货人电话",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Province",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"province\"`",
+                    "Comment": "// 省份",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "City",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"city\"`",
+                    "Comment": "// 城市",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "District",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"district\"`",
+                    "Comment": "// 区域",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Address",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"address\"`",
+                    "Comment": "// 详细地址",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "PostalCode",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"postal_code,optional\"`",
+                    "Comment": "// 邮政编码",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "IsDefault",
+                    "Type": {
+                        "RawName": "bool"
+                    },
+                    "Tag": "`json:\"is_default\"`",
+                    "Comment": "// 是否默认地址",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 收货地址"
+            ]
+        },
+        {
+            "RawName": "UpdateOrderStatusReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 订单ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Status",
+                    "Type": {
+                        "RawName": "int32"
+                    },
+                    "Tag": "`json:\"status\"`",
+                    "Comment": "// 新状态",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "TrackingNo",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"tracking_no,optional\"`",
+                    "Comment": "// 物流单号",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Remark",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"remark,optional\"`",
+                    "Comment": "// 备注",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 更新订单状态请求"
+            ]
+        }
+    ],
+    "Service": {
+        "Name": "OrderService",
+        "Groups": [
+            {
+                "Annotation": {
+                    "Properties": {
+                        "group": "order",
+                        "jwt": "Auth",
+                        "prefix": "/api/v1/orders"
+                    }
+                },
+                "Routes": [
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/",
+                        "RequestType": {
+                            "RawName": "CreateOrderReq",
+                            "Members": [
+                                {
+                                    "Name": "Items",
+                                    "Type": {
+                                        "RawName": "[]CreateOrderItem",
+                                        "Value": {
+                                            "RawName": "CreateOrderItem",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"items\"`",
+                                    "Comment": "// 订单商品",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingAddressId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"shipping_address_id\"`",
+                                    "Comment": "// 收货地址ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentMethod",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"payment_method\"`",
+                                    "Comment": "// 支付方式",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Remark",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"remark,optional\"`",
+                                    "Comment": "// 订单备注",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CouponCode",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"coupon_code,optional\"`",
+                                    "Comment": "// 优惠券代码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 创建订单请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Order",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OrderNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"order_no\"`",
+                                    "Comment": "// 订单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"user_id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserName",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"user_name,optional\"`",
+                                    "Comment": "// 用户名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Items",
+                                    "Type": {
+                                        "RawName": "[]OrderItem",
+                                        "Value": {
+                                            "RawName": "OrderItem",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"items\"`",
+                                    "Comment": "// 订单商品",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TotalAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"total_amount\"`",
+                                    "Comment": "// 订单总金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingFee",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"shipping_fee\"`",
+                                    "Comment": "// 运费",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DiscountAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"discount_amount\"`",
+                                    "Comment": "// 优惠金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PayableAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"payable_amount\"`",
+                                    "Comment": "// 应付金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "OrderStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "OrderStatusPending",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 待支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusPaid",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 已支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusShipped",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 已发货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusDelivered",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 已送达",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusCancelled",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"5\"`",
+                                                "Comment": "// 已取消",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusRefunded",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"6\"`",
+                                                "Comment": "// 已退款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 订单状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 订单状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentMethod",
+                                    "Type": {
+                                        "RawName": "PaymentMethod",
+                                        "Members": [
+                                            {
+                                                "Name": "PaymentMethodAlipay",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 支付宝",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodWechat",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 微信支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCard",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 银行卡",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCash",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 货到付款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 支付方式枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"payment_method,optional\"`",
+                                    "Comment": "// 支付方式",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingAddress",
+                                    "Type": {
+                                        "RawName": "ShippingAddress",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 地址ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ReceiverName",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"receiver_name\"`",
+                                                "Comment": "// 收货人姓名",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Phone",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"phone\"`",
+                                                "Comment": "// 收货人电话",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Province",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"province\"`",
+                                                "Comment": "// 省份",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "City",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"city\"`",
+                                                "Comment": "// 城市",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "District",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"district\"`",
+                                                "Comment": "// 区域",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Address",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"address\"`",
+                                                "Comment": "// 详细地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PostalCode",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"postal_code,optional\"`",
+                                                "Comment": "// 邮政编码",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsDefault",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_default\"`",
+                                                "Comment": "// 是否默认地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 收货地址"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"shipping_address\"`",
+                                    "Comment": "// 收货地址",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Remark",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"remark,optional\"`",
+                                    "Comment": "// 订单备注",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TrackingNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"tracking_no,optional\"`",
+                                    "Comment": "// 物流单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaidAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"paid_at,optional\"`",
+                                    "Comment": "// 支付时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"shipped_at,optional\"`",
+                                    "Comment": "// 发货时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DeliveredAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"delivered_at,optional\"`",
+                                    "Comment": "// 送达时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 订单信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "createOrder",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "创建新的订单",
+                                "summary": "创建订单"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/",
+                        "RequestType": {
+                            "RawName": "GetOrdersReq",
+                            "Members": [
+                                {
+                                    "Name": "Page",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"page,optional,default=1\"`",
+                                    "Comment": "// 页码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Size",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"size,optional,default=10\"`",
+                                    "Comment": "// 每页大小",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"status,optional\"`",
+                                    "Comment": "// 状态筛选",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"user_id,optional\"`",
+                                    "Comment": "// 用户ID筛选",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OrderNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"order_no,optional\"`",
+                                    "Comment": "// 订单号搜索",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "StartDate",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"start_date,optional\"`",
+                                    "Comment": "// 开始日期",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "EndDate",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"end_date,optional\"`",
+                                    "Comment": "// 结束日期",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 订单列表请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "GetOrdersResp",
+                            "Members": [
+                                {
+                                    "Name": "Total",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"total\"`",
+                                    "Comment": "// 总数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "List",
+                                    "Type": {
+                                        "RawName": "[]Order",
+                                        "Value": {
+                                            "RawName": "Order",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"list\"`",
+                                    "Comment": "// 订单列表",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 订单列表响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getOrders",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "分页获取订单列表，支持多种筛选",
+                                "summary": "获取订单列表"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/:id",
+                        "RequestType": {
+                            "RawName": "GetOrderReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 获取订单详情请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Order",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OrderNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"order_no\"`",
+                                    "Comment": "// 订单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"user_id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserName",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"user_name,optional\"`",
+                                    "Comment": "// 用户名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Items",
+                                    "Type": {
+                                        "RawName": "[]OrderItem",
+                                        "Value": {
+                                            "RawName": "OrderItem",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"items\"`",
+                                    "Comment": "// 订单商品",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TotalAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"total_amount\"`",
+                                    "Comment": "// 订单总金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingFee",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"shipping_fee\"`",
+                                    "Comment": "// 运费",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DiscountAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"discount_amount\"`",
+                                    "Comment": "// 优惠金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PayableAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"payable_amount\"`",
+                                    "Comment": "// 应付金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "OrderStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "OrderStatusPending",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 待支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusPaid",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 已支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusShipped",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 已发货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusDelivered",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 已送达",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusCancelled",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"5\"`",
+                                                "Comment": "// 已取消",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusRefunded",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"6\"`",
+                                                "Comment": "// 已退款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 订单状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 订单状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentMethod",
+                                    "Type": {
+                                        "RawName": "PaymentMethod",
+                                        "Members": [
+                                            {
+                                                "Name": "PaymentMethodAlipay",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 支付宝",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodWechat",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 微信支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCard",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 银行卡",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCash",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 货到付款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 支付方式枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"payment_method,optional\"`",
+                                    "Comment": "// 支付方式",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingAddress",
+                                    "Type": {
+                                        "RawName": "ShippingAddress",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 地址ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ReceiverName",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"receiver_name\"`",
+                                                "Comment": "// 收货人姓名",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Phone",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"phone\"`",
+                                                "Comment": "// 收货人电话",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Province",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"province\"`",
+                                                "Comment": "// 省份",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "City",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"city\"`",
+                                                "Comment": "// 城市",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "District",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"district\"`",
+                                                "Comment": "// 区域",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Address",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"address\"`",
+                                                "Comment": "// 详细地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PostalCode",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"postal_code,optional\"`",
+                                                "Comment": "// 邮政编码",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsDefault",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_default\"`",
+                                                "Comment": "// 是否默认地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 收货地址"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"shipping_address\"`",
+                                    "Comment": "// 收货地址",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Remark",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"remark,optional\"`",
+                                    "Comment": "// 订单备注",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TrackingNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"tracking_no,optional\"`",
+                                    "Comment": "// 物流单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaidAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"paid_at,optional\"`",
+                                    "Comment": "// 支付时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"shipped_at,optional\"`",
+                                    "Comment": "// 发货时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DeliveredAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"delivered_at,optional\"`",
+                                    "Comment": "// 送达时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 订单信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getOrder",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "根据订单ID获取订单详细信息",
+                                "summary": "获取订单详情"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/:id/cancel",
+                        "RequestType": {
+                            "RawName": "CancelOrderReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Reason",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"reason\"`",
+                                    "Comment": "// 取消原因",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 取消订单请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Order",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OrderNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"order_no\"`",
+                                    "Comment": "// 订单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"user_id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserName",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"user_name,optional\"`",
+                                    "Comment": "// 用户名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Items",
+                                    "Type": {
+                                        "RawName": "[]OrderItem",
+                                        "Value": {
+                                            "RawName": "OrderItem",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"items\"`",
+                                    "Comment": "// 订单商品",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TotalAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"total_amount\"`",
+                                    "Comment": "// 订单总金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingFee",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"shipping_fee\"`",
+                                    "Comment": "// 运费",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DiscountAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"discount_amount\"`",
+                                    "Comment": "// 优惠金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PayableAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"payable_amount\"`",
+                                    "Comment": "// 应付金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "OrderStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "OrderStatusPending",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 待支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusPaid",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 已支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusShipped",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 已发货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusDelivered",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 已送达",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusCancelled",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"5\"`",
+                                                "Comment": "// 已取消",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusRefunded",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"6\"`",
+                                                "Comment": "// 已退款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 订单状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 订单状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentMethod",
+                                    "Type": {
+                                        "RawName": "PaymentMethod",
+                                        "Members": [
+                                            {
+                                                "Name": "PaymentMethodAlipay",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 支付宝",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodWechat",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 微信支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCard",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 银行卡",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCash",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 货到付款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 支付方式枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"payment_method,optional\"`",
+                                    "Comment": "// 支付方式",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingAddress",
+                                    "Type": {
+                                        "RawName": "ShippingAddress",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 地址ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ReceiverName",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"receiver_name\"`",
+                                                "Comment": "// 收货人姓名",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Phone",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"phone\"`",
+                                                "Comment": "// 收货人电话",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Province",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"province\"`",
+                                                "Comment": "// 省份",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "City",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"city\"`",
+                                                "Comment": "// 城市",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "District",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"district\"`",
+                                                "Comment": "// 区域",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Address",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"address\"`",
+                                                "Comment": "// 详细地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PostalCode",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"postal_code,optional\"`",
+                                                "Comment": "// 邮政编码",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsDefault",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_default\"`",
+                                                "Comment": "// 是否默认地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 收货地址"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"shipping_address\"`",
+                                    "Comment": "// 收货地址",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Remark",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"remark,optional\"`",
+                                    "Comment": "// 订单备注",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TrackingNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"tracking_no,optional\"`",
+                                    "Comment": "// 物流单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaidAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"paid_at,optional\"`",
+                                    "Comment": "// 支付时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"shipped_at,optional\"`",
+                                    "Comment": "// 发货时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DeliveredAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"delivered_at,optional\"`",
+                                    "Comment": "// 送达时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 订单信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "cancelOrder",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "取消指定的订单",
+                                "summary": "取消订单"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/:id/pay",
+                        "RequestType": {
+                            "RawName": "PayOrderReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentMethod",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"payment_method\"`",
+                                    "Comment": "// 支付方式",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentData",
+                                    "Type": {
+                                        "RawName": "map[string]string",
+                                        "Key": "string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"payment_data,optional\"`",
+                                    "Comment": "// 支付相关数据",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 支付订单请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "PayOrderResp",
+                            "Members": [
+                                {
+                                    "Name": "PaymentId",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"payment_id\"`",
+                                    "Comment": "// 支付ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentUrl",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"payment_url,optional\"`",
+                                    "Comment": "// 支付链接",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "QrCode",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"qr_code,optional\"`",
+                                    "Comment": "// 支付二维码",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentData",
+                                    "Type": {
+                                        "RawName": "map[string]string",
+                                        "Key": "string",
+                                        "Value": {
+                                            "RawName": "string"
+                                        }
+                                    },
+                                    "Tag": "`json:\"payment_data,optional\"`",
+                                    "Comment": "// 支付相关数据",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 支付响应"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "payOrder",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "发起订单支付流程",
+                                "summary": "支付订单"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "put",
+                        "Path": "/:id/status",
+                        "RequestType": {
+                            "RawName": "UpdateOrderStatusReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "int32"
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 新状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TrackingNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"tracking_no,optional\"`",
+                                    "Comment": "// 物流单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Remark",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"remark,optional\"`",
+                                    "Comment": "// 备注",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 更新订单状态请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "Order",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 订单ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "OrderNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"order_no\"`",
+                                    "Comment": "// 订单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserId",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"user_id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UserName",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"user_name,optional\"`",
+                                    "Comment": "// 用户名称",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Items",
+                                    "Type": {
+                                        "RawName": "[]OrderItem",
+                                        "Value": {
+                                            "RawName": "OrderItem",
+                                            "Members": null,
+                                            "Docs": null
+                                        }
+                                    },
+                                    "Tag": "`json:\"items\"`",
+                                    "Comment": "// 订单商品",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TotalAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"total_amount\"`",
+                                    "Comment": "// 订单总金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingFee",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"shipping_fee\"`",
+                                    "Comment": "// 运费",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DiscountAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"discount_amount\"`",
+                                    "Comment": "// 优惠金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PayableAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"payable_amount\"`",
+                                    "Comment": "// 应付金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Status",
+                                    "Type": {
+                                        "RawName": "OrderStatus",
+                                        "Members": [
+                                            {
+                                                "Name": "OrderStatusPending",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 待支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusPaid",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 已支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusShipped",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 已发货",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusDelivered",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 已送达",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusCancelled",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"5\"`",
+                                                "Comment": "// 已取消",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "OrderStatusRefunded",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"6\"`",
+                                                "Comment": "// 已退款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 订单状态枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"status\"`",
+                                    "Comment": "// 订单状态",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaymentMethod",
+                                    "Type": {
+                                        "RawName": "PaymentMethod",
+                                        "Members": [
+                                            {
+                                                "Name": "PaymentMethodAlipay",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"1\"`",
+                                                "Comment": "// 支付宝",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodWechat",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"2\"`",
+                                                "Comment": "// 微信支付",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCard",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"3\"`",
+                                                "Comment": "// 银行卡",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PaymentMethodCash",
+                                                "Type": {
+                                                    "RawName": "int32"
+                                                },
+                                                "Tag": "`json:\"-\" val:\"4\"`",
+                                                "Comment": "// 货到付款",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 支付方式枚举"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"payment_method,optional\"`",
+                                    "Comment": "// 支付方式",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippingAddress",
+                                    "Type": {
+                                        "RawName": "ShippingAddress",
+                                        "Members": [
+                                            {
+                                                "Name": "Id",
+                                                "Type": {
+                                                    "RawName": "int64"
+                                                },
+                                                "Tag": "`json:\"id\"`",
+                                                "Comment": "// 地址ID",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "ReceiverName",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"receiver_name\"`",
+                                                "Comment": "// 收货人姓名",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Phone",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"phone\"`",
+                                                "Comment": "// 收货人电话",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Province",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"province\"`",
+                                                "Comment": "// 省份",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "City",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"city\"`",
+                                                "Comment": "// 城市",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "District",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"district\"`",
+                                                "Comment": "// 区域",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "Address",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"address\"`",
+                                                "Comment": "// 详细地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "PostalCode",
+                                                "Type": {
+                                                    "RawName": "string"
+                                                },
+                                                "Tag": "`json:\"postal_code,optional\"`",
+                                                "Comment": "// 邮政编码",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            },
+                                            {
+                                                "Name": "IsDefault",
+                                                "Type": {
+                                                    "RawName": "bool"
+                                                },
+                                                "Tag": "`json:\"is_default\"`",
+                                                "Comment": "// 是否默认地址",
+                                                "Docs": [],
+                                                "IsInline": false
+                                            }
+                                        ],
+                                        "Docs": [
+                                            "// 收货地址"
+                                        ]
+                                    },
+                                    "Tag": "`json:\"shipping_address\"`",
+                                    "Comment": "// 收货地址",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Remark",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"remark,optional\"`",
+                                    "Comment": "// 订单备注",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TrackingNo",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"tracking_no,optional\"`",
+                                    "Comment": "// 物流单号",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaidAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"paid_at,optional\"`",
+                                    "Comment": "// 支付时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"shipped_at,optional\"`",
+                                    "Comment": "// 发货时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "DeliveredAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"delivered_at,optional\"`",
+                                    "Comment": "// 送达时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CreatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"created_at\"`",
+                                    "Comment": "// 创建时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "UpdatedAt",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"updated_at\"`",
+                                    "Comment": "// 更新时间",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 订单信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "updateOrderStatus",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "更新订单的状态信息",
+                                "summary": "更新订单状态"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/stats",
+                        "RequestType": null,
+                        "ResponseType": {
+                            "RawName": "OrderStats",
+                            "Members": [
+                                {
+                                    "Name": "TotalOrders",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"total_orders\"`",
+                                    "Comment": "// 订单总数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "TotalAmount",
+                                    "Type": {
+                                        "RawName": "float64"
+                                    },
+                                    "Tag": "`json:\"total_amount\"`",
+                                    "Comment": "// 订单总金额",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PendingOrders",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"pending_orders\"`",
+                                    "Comment": "// 待支付订单数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "PaidOrders",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"paid_orders\"`",
+                                    "Comment": "// 已支付订单数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "ShippedOrders",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"shipped_orders\"`",
+                                    "Comment": "// 已发货订单数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CompletedOrders",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"completed_orders\"`",
+                                    "Comment": "// 已完成订单数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "CancelledOrders",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"cancelled_orders\"`",
+                                    "Comment": "// 已取消订单数",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 订单统计信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getOrderStats",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "获取订单相关的统计信息",
+                                "summary": "获取订单统计"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    }
+                ]
+            }
+        ]
+    }
+}

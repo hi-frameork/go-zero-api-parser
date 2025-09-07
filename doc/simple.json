@@ -1,0 +1,285 @@
+{
+    "Info": {
+        "Title": "简单测试接口",
+        "Desc": "用于测试解析器的简单API",
+        "Version": "v1.0",
+        "Author": "测试团队",
+        "Email": "test@example.com",
+        "Properties": {
+            "author": "测试团队",
+            "desc": "用于测试解析器的简单API",
+            "email": "test@example.com",
+            "title": "简单测试接口",
+            "version": "v1.0"
+        }
+    },
+    "Syntax": {
+        "Version": "",
+        "Doc": null,
+        "Comment": null
+    },
+    "Imports": null,
+    "Types": [
+        {
+            "RawName": "CreateUserReq",
+            "Members": [
+                {
+                    "Name": "Name",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"name\"`",
+                    "Comment": "// 用户名",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Email",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"email,optional\"`",
+                    "Comment": "// 邮箱",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 创建用户请求"
+            ]
+        },
+        {
+            "RawName": "GetUserReq",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\" path:\"id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 获取用户请求"
+            ]
+        },
+        {
+            "RawName": "SimpleUser",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": {
+                        "RawName": "int64"
+                    },
+                    "Tag": "`json:\"id\"`",
+                    "Comment": "// 用户ID",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Name",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"name\"`",
+                    "Comment": "// 用户名",
+                    "Docs": [],
+                    "IsInline": false
+                },
+                {
+                    "Name": "Email",
+                    "Type": {
+                        "RawName": "string"
+                    },
+                    "Tag": "`json:\"email,optional\"`",
+                    "Comment": "// 邮箱（可选）",
+                    "Docs": [],
+                    "IsInline": false
+                }
+            ],
+            "Docs": [
+                "// 用户基本信息"
+            ]
+        }
+    ],
+    "Service": {
+        "Name": "SimpleService",
+        "Groups": [
+            {
+                "Annotation": {
+                    "Properties": {
+                        "group": "simple",
+                        "prefix": "/api/v1/simple"
+                    }
+                },
+                "Routes": [
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "post",
+                        "Path": "/user",
+                        "RequestType": {
+                            "RawName": "CreateUserReq",
+                            "Members": [
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 用户名",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Email",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"email,optional\"`",
+                                    "Comment": "// 邮箱",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 创建用户请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "SimpleUser",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 用户名",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Email",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"email,optional\"`",
+                                    "Comment": "// 邮箱（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户基本信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "createUser",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "创建新用户",
+                                "summary": "创建用户"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    },
+                    {
+                        "AtServerAnnotation": {
+                            "Properties": null
+                        },
+                        "Method": "get",
+                        "Path": "/user/:id",
+                        "RequestType": {
+                            "RawName": "GetUserReq",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\" path:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 获取用户请求"
+                            ]
+                        },
+                        "ResponseType": {
+                            "RawName": "SimpleUser",
+                            "Members": [
+                                {
+                                    "Name": "Id",
+                                    "Type": {
+                                        "RawName": "int64"
+                                    },
+                                    "Tag": "`json:\"id\"`",
+                                    "Comment": "// 用户ID",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Name",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"name\"`",
+                                    "Comment": "// 用户名",
+                                    "Docs": [],
+                                    "IsInline": false
+                                },
+                                {
+                                    "Name": "Email",
+                                    "Type": {
+                                        "RawName": "string"
+                                    },
+                                    "Tag": "`json:\"email,optional\"`",
+                                    "Comment": "// 邮箱（可选）",
+                                    "Docs": [],
+                                    "IsInline": false
+                                }
+                            ],
+                            "Docs": [
+                                "// 用户基本信息"
+                            ]
+                        },
+                        "Docs": null,
+                        "Handler": "getUser",
+                        "AtDoc": {
+                            "Properties": {
+                                "description": "根据ID获取用户信息",
+                                "summary": "获取用户信息"
+                            },
+                            "Text": ""
+                        },
+                        "HandlerDoc": [],
+                        "HandlerComment": [],
+                        "Doc": [],
+                        "Comment": []
+                    }
+                ]
+            }
+        ]
+    }
+}

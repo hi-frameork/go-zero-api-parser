@@ -1,0 +1,183 @@
+syntax = "v1"
+
+info(
+    title: "商品服务接口"
+    desc: "电商商品管理API"
+    author: "产品团队"
+    email: "product@example.com"
+    version: "v2.0"
+)
+
+// import "common.api"
+
+type (
+    // 商品分类
+    Category {
+        Id int64 `json:"id"`                        // 分类ID
+        Name string `json:"name"`                   // 分类名称
+        Description string `json:"description"`     // 分类描述
+        ParentId int64 `json:"parent_id"`           // 父分类ID
+        Level int32 `json:"level"`                  // 分类层级
+        SortOrder int32 `json:"sort_order"`         // 排序
+        IsActive bool `json:"is_active"`            // 是否激活
+        CreatedAt string `json:"created_at"`        // 创建时间
+    }
+
+    // 商品信息
+    Product {
+        Id int64 `json:"id"`                        // 商品ID
+        Name string `json:"name"`                   // 商品名称
+        Description string `json:"description"`     // 商品描述
+        CategoryId int64 `json:"category_id"`       // 分类ID
+        Category Category `json:"category"`         // 分类信息
+        Price float64 `json:"price"`                // 价格
+        OriginalPrice float64 `json:"original_price"` // 原价
+        Stock int32 `json:"stock"`                  // 库存
+        Images []string `json:"images"`             // 商品图片
+        Tags []string `json:"tags"`                 // 商品标签
+        Status ProductStatus `json:"status"`        // 商品状态
+        Weight float64 `json:"weight,optional"`     // 重量（克）
+        Dimensions ProductDimensions `json:"dimensions,optional"` // 尺寸
+        CreatedAt string `json:"created_at"`        // 创建时间
+        UpdatedAt string `json:"updated_at"`        // 更新时间
+    }
+
+    // 商品状态枚举
+    ProductStatus {
+        ProductStatusDraft int32 `json:"-" val:"0"`      // 草稿
+        ProductStatusActive int32 `json:"-" val:"1"`     // 上架
+        ProductStatusInactive int32 `json:"-" val:"2"`   // 下架
+        ProductStatusOutOfStock int32 `json:"-" val:"3"` // 缺货
+    }
+
+    // 商品尺寸
+    ProductDimensions {
+        Length float64 `json:"length"`              // 长度（厘米）
+        Width float64 `json:"width"`                // 宽度（厘米）
+        Height float64 `json:"height"`              // 高度（厘米）
+    }
+
+    // 创建商品请求
+    CreateProductReq {
+        Name string `json:"name"`                   // 商品名称
+        Description string `json:"description"`     // 商品描述
+        CategoryId int64 `json:"category_id"`       // 分类ID
+        Price float64 `json:"price"`                // 价格
+        OriginalPrice float64 `json:"original_price,optional"` // 原价
+        Stock int32 `json:"stock"`                  // 库存
+        Images []string `json:"images,optional"`    // 商品图片
+        Tags []string `json:"tags,optional"`        // 商品标签
+        Weight float64 `json:"weight,optional"`     // 重量
+        Dimensions ProductDimensions `json:"dimensions,optional"` // 尺寸
+    }
+
+    // 更新商品请求
+    UpdateProductReq {
+        Id int64 `json:"id" path:"id"`              // 商品ID
+        Name string `json:"name,optional"`          // 商品名称
+        Description string `json:"description,optional"` // 商品描述
+        CategoryId int64 `json:"category_id,optional"` // 分类ID
+        Price float64 `json:"price,optional"`       // 价格
+        OriginalPrice float64 `json:"original_price,optional"` // 原价
+        Stock int32 `json:"stock,optional"`         // 库存
+        Images []string `json:"images,optional"`    // 商品图片
+        Tags []string `json:"tags,optional"`        // 商品标签
+        Status int32 `json:"status,optional"`       // 商品状态
+        Weight float64 `json:"weight,optional"`     // 重量
+        Dimensions ProductDimensions `json:"dimensions,optional"` // 尺寸
+    }
+
+    // 获取商品请求
+    GetProductReq {
+        Id int64 `json:"id" path:"id"`              // 商品ID
+    }
+
+    // 商品列表请求
+    GetProductsReq {
+        Page int32 `json:"page,optional,default=1"` // 页码
+        Size int32 `json:"size,optional,default=20"` // 每页大小
+        CategoryId int64 `json:"category_id,optional"` // 分类ID筛选
+        Keyword string `json:"keyword,optional"`    // 搜索关键词
+        Status int32 `json:"status,optional"`       // 状态筛选
+        MinPrice float64 `json:"min_price,optional"` // 最低价格
+        MaxPrice float64 `json:"max_price,optional"` // 最高价格
+        SortBy string `json:"sort_by,optional"`     // 排序字段
+        SortOrder string `json:"sort_order,optional"` // 排序方向
+    }
+
+    // 商品列表响应
+    GetProductsResp {
+        Total int64 `json:"total"`                  // 总数
+        List []Product `json:"list"`                // 商品列表
+        Categories []Category `json:"categories"`   // 分类列表
+    }
+
+    // 库存更新请求
+    UpdateStockReq {
+        Id int64 `json:"id" path:"id"`              // 商品ID
+        Stock int32 `json:"stock"`                  // 新库存数量
+        Operation string `json:"operation"`         // 操作类型：set/add/subtract
+    }
+
+    // 批量操作请求
+    BatchOperationReq {
+        ProductIds []int64 `json:"product_ids"`     // 商品ID列表
+        Operation string `json:"operation"`         // 操作类型：delete/activate/deactivate
+    }
+)
+
+@server(
+    group: product
+    prefix: /api/v2/products
+    middleware: Auth,RateLimit
+)
+service ProductService {
+    @doc(
+        summary: "创建商品"
+        description: "添加新的商品到系统中"
+    )
+    @handler createProduct
+    post / (CreateProductReq) returns (Product)
+
+    @doc(
+        summary: "获取商品详情"
+        description: "根据商品ID获取商品详细信息"
+    )
+    @handler getProduct
+    get /:id (GetProductReq) returns (Product)
+
+    @doc(
+        summary: "更新商品信息"
+        description: "更新商品的基本信息和属性"
+    )
+    @handler updateProduct
+    put /:id (UpdateProductReq) returns (Product)
+
+    @doc(
+        summary: "删除商品"
+        description: "删除指定的商品"
+    )
+    @handler deleteProduct
+            delete /:id (GetProductReq) returns (Product)
+
+    @doc(
+        summary: "获取商品列表"
+        description: "分页获取商品列表，支持多种筛选和排序"
+    )
+    @handler getProducts
+    get / (GetProductsReq) returns (GetProductsResp)
+
+    @doc(
+        summary: "更新商品库存"
+        description: "更新商品的库存数量"
+    )
+    @handler updateStock
+    patch /:id/stock (UpdateStockReq) returns (Product)
+
+    @doc(
+        summary: "批量操作商品"
+        description: "对多个商品执行批量操作"
+    )
+    @handler batchOperation
+            post /batch (BatchOperationReq) returns (GetProductsResp)
+}
